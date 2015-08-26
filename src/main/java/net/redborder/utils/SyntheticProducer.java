@@ -18,7 +18,8 @@ public class SyntheticProducer {
 
         // Create the producers
         String zkConnect = configFile.get("zk_connect");
-        KafkaProducer kafkaProducer = new KafkaProducer(zkConnect);
+        String topic = configFile.get("topic");
+        KafkaProducer kafkaProducer = new KafkaProducer(zkConnect, topic);
 
         // Create the scheduler
         Scheduler scheduler = new StandardScheduler(messageGenerator, kafkaProducer);

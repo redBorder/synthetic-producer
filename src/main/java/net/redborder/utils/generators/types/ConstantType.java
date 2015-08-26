@@ -3,13 +3,13 @@ package net.redborder.utils.generators.types;
 import java.util.Map;
 
 public class ConstantType implements Type {
-    private String constant;
+    private Object constant;
 
     public ConstantType(Map<String, Object> params) {
-        this.constant = String.valueOf(params.get("value"));
+        this.constant = params.get("value");
     }
 
-    public ConstantType(String constant) {
+    public ConstantType(Object constant) {
         this.constant = constant;
     }
 

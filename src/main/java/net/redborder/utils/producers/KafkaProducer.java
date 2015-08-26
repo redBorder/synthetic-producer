@@ -2,6 +2,7 @@ package net.redborder.utils.producers;
 
 import com.google.common.base.Joiner;
 import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
@@ -17,13 +18,16 @@ import java.util.*;
 public class KafkaProducer implements IProducer {
     private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class);
 
-    private String brokersString;
+    private String brokersString, topic;
     private Producer<String, String> producer;
 
     // Connects to ZK, reads the broker data there, and builds
     // a string like the following: host1:9092,host2:9092.
     // After that, creates a kafka producer with that data.
-    public KafkaProducer(String zkConnect) {
+    public KafkaProducer(String zkConnect, String topic) {
+        // Set the topic
+        this.topic = topic;
+
         // Connect to ZooKeeper
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
         CuratorFramework client = CuratorFrameworkFactory.newClient(zkConnect, retryPolicy);
@@ -86,6 +90,7 @@ public class KafkaProducer implements IProducer {
 
     @Override
     public void send(String message) {
-        System.out.println(message);
+        KeyedMessage<String, String> keyedMessage = new KeyedMessage<>(topic, message);
+        producer.send(keyedMessage);
     }
 }
