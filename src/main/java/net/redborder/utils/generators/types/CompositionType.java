@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class CompositionType implements Type {
     private String separator;
-    private List<Type> components;
+    private List<Type> components = new ArrayList<>();
 
     public CompositionType(Map<String, Object> params) {
         this.separator = (String) params.get("separator");
