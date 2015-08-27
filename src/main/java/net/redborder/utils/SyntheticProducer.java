@@ -22,7 +22,9 @@ public class SyntheticProducer {
         KafkaProducer kafkaProducer = new KafkaProducer(zkConnect, topic);
 
         // Create the scheduler
-        Scheduler scheduler = new StandardScheduler(messageGenerator, kafkaProducer);
+        int rate = configFile.get("rate");
+        int threads = configFile.get("threads");
+        Scheduler scheduler = new StandardScheduler(messageGenerator, kafkaProducer, rate, threads);
         scheduler.start();
 
         // Shutdown hooks

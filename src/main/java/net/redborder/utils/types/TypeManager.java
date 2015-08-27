@@ -1,4 +1,4 @@
-package net.redborder.utils.generators.types;
+package net.redborder.utils.types;
 
 import org.slf4j.Logger;
 import java.lang.reflect.Constructor;
@@ -22,7 +22,7 @@ public class TypeManager {
         // If this type wasn't used yet, get it from its name
         if (typeClass == null) {
             String capitalized = typeName.substring(0, 1).toUpperCase() + typeName.substring(1);
-            String fullClassName = "net.redborder.utils.generators.types." + capitalized + "Type";
+            String fullClassName = "net.redborder.utils.types." + capitalized + "Type";
 
             try {
                 typeClass = Class.forName(fullClassName);

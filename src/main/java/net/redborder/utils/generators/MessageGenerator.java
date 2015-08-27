@@ -1,7 +1,7 @@
 package net.redborder.utils.generators;
 
-import net.redborder.utils.generators.types.Type;
-import net.redborder.utils.generators.types.TypeManager;
+import net.redborder.utils.types.Type;
+import net.redborder.utils.types.TypeManager;
 
 import java.util.HashMap;
 import java.util.Map;

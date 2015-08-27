@@ -1,4 +1,4 @@
-package net.redborder.utils.generators.types;
+package net.redborder.utils.types;
 
 import java.util.Map;
 

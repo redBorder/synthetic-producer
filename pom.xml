@@ -33,6 +33,13 @@
             </exclusions>
         </dependency>
 
+        <!-- Metrics reporting -->
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
         <!-- Curator (Zookeeper) -->
         <dependency>
             <groupId>org.apache.curator</groupId>
