@@ -4,13 +4,12 @@ import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.util.concurrent.RateLimiter;
+import com.google.gson.Gson;
 import net.redborder.utils.generators.Generator;
 import net.redborder.utils.producers.IProducer;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,18 +62,14 @@ public class StandardScheduler implements Scheduler {
     private class SenderThread extends Thread {
         @Override
         public void run() {
+            Gson gson = new Gson();
+
             while (!currentThread().isInterrupted()) {
                 Map<String, Object> message = generator.generate();
-                ObjectMapper objectMapper = new ObjectMapper();
-
-                try {
-                    String json = objectMapper.writeValueAsString(message);
-                    rateLimiter.acquire();
-                    producer.send(json);
-                    messages.mark();
-                } catch (IOException e) {
-                    log.error("Couldn't serialize message {}", message);
-                }
+                String json = gson.toJson(message);
+                rateLimiter.acquire();
+                producer.send(json);
+                messages.mark();
             }
         }
     }

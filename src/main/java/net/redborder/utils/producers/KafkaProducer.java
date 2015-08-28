@@ -1,6 +1,7 @@
 package net.redborder.utils.producers;
 
 import com.google.common.base.Joiner;
+import com.google.gson.Gson;
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
@@ -8,11 +9,9 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.*;
 
 public class KafkaProducer implements IProducer {
@@ -55,11 +54,12 @@ public class KafkaProducer implements IProducer {
 
             if (jsonString != null) {
                 try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    Map<String, Object> json = mapper.readValue(jsonString, Map.class);
-                    String host = json.get("host") + ":" + json.get("port");
+                    Gson gson = new Gson();
+                    Map json = gson.fromJson(jsonString, Map.class);
+                    Double port = (Double) json.get("port");
+                    String host = json.get("host") + ":" + port.intValue();
                     hosts.add(host);
-                } catch (NullPointerException | IOException e) {
+                } catch (NullPointerException e) {
                     log.error("Failed converting a JSON tuple to a Map class", e);
                 }
             }
