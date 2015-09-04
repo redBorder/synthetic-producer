@@ -1,0 +1,175 @@
+zk_connect: localhost:2181
+topic: rb_producer
+threads: 2
+rate: 100000
+fields:
+  client_latlong:
+    type: constant
+    value: '37.89,26.39'
+  dst_country_code:
+    type: constant
+    value: US
+  dot11_status:
+    type: collection
+    values:
+      - ASSOCIATED
+      - PROBING
+      - UNKNOWN
+  bytes:
+    type: integer
+    min: 10
+    max: 3000
+  src_net_name:
+    type: constant
+    value: 0.0.0.0/0
+  flow_sampler_id:
+    type: constant
+    value: 0
+  direction:
+    type: constant
+    value: ingress
+  wireless_station:
+    type: mac
+    min: 00:00:00:00:00:11
+    max: 00:00:00:00:00:44
+  biflow_direction:
+    type: constant
+    value: initiator
+  pkts:
+    type: integer
+    min: 1
+    max: 500
+  dst:
+    type: ip
+    min: 80.82.34.12
+    max: 80.82.34.72
+  type:
+    type: constant
+    value: NetFlowv10
+  campus:
+    type: collection
+    values:
+      - Campus A
+      - Campus B
+      - Campus C
+      - Campus D
+      - Campus E
+  building:
+    type: collection
+    values:
+      - Building A
+      - Building B
+      - Building C
+      - Building D
+      - Building E
+  floor:
+    type: collection
+    values:
+      - Floor A
+      - Floor B
+      - Floor C
+      - Floor D
+      - Floor E
+  timestamp:
+    type: timestamp
+  client_mac:
+    type: mac
+    min: 00:11:22:33:44:00
+    max: 00:11:22:33:44:FF
+  wireless_id:
+    type: collection
+    values:
+      - SSID_A
+      - SSID_B
+      - SSID_C
+  flow_end_reason:
+    type: constant
+    value: idle timeout
+  src_net:
+    type: constant
+    value: 0.0.0.0/0
+  client_rssi_num:
+    type: integer
+    negative: true
+    min: 0
+    max: 80
+  engine_id_name:
+    type: constant
+    value: IANA-L4
+  src:
+    type: ip    
+    min: 192.168.1.1
+    max: 192.168.1.128
+  application_id:
+    type: composition
+    separator: ':'
+    components:
+      - type: integer
+        min: 0
+        max: 11
+      - type: integer
+        min: 0
+        max: 101
+  sensor_ip:
+    type: constant
+    value: 90.1.44.3
+  application_id_name:
+    type: collection
+    values:
+      - APP A
+      - APP B
+      - APP C
+      - APP D
+      - APP E
+  dst_net:
+    type: constant
+    value: 0.0.0.0/0
+  dst_net_name:
+    type: constant
+    value: 0.0.0.0/0
+  l4_proto:
+    type: integer
+    min: 0
+    max: 11
+  ip_protocol_version:
+    type: constant
+    value: 4
+  sensor_name:
+    type: collection
+    values:
+      - sensorA
+      - sensorB
+      - sensorC
+  src_country_code:
+    type: constant
+    value: US
+  engine_id:
+    type: integer
+    min: 0
+    max: 21
+  client_mac_vendor:
+    type: constant
+    value: SAMSUNG ELECTRO-MECHANICS
+  first_switched:
+    type: timestamp
+  http:
+    type: collection
+    values:
+      - 'http://www.google.es'
+      - 'http://www.microsoft.es'
+      - 'http://www.apple.com'
+  src_port: 
+    type: constant
+    value: 80
+  namespace_uuid:
+    type: collection
+    values:
+      - 1111
+      - 2222
+      - 3333
+  sensor_uuid:
+    type: collection
+    values:
+      - 2
+      - 7
+      - 4

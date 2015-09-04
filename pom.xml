@@ -8,6 +8,11 @@
     <artifactId>synthetic-producer</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <scm>
+        <developerConnection>scm:git:git@github.com:redBorder/synthetic-producer.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencies>
         <!-- Logging -->
         <dependency>
