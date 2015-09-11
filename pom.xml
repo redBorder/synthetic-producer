@@ -4,11 +4,11 @@
 
     <groupId>net.redborder.utils</groupId>
     <artifactId>synthetic-producer</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
 
     <scm>
         <developerConnection>scm:git:git@github.com:redBorder/synthetic-producer.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>synthetic-producer-1.1</tag>
     </scm>
 
     <dependencies>
