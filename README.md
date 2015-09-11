@@ -2,10 +2,16 @@
 Generates random JSON messages and sends them to Apache Kafka.
 It uses Apache Zookeeper to discover the available brokers and partitions for a given topic.
 
-To run it, just execute the following command:
+Usage:
 
 ```bash
-$ java -jar synthetic-producer-selfcontained-VERSION.jar configFile.yml
+$ java -jar target/synthetic-producer-1.1-selfcontained.jar
+usage: java -jar synthetic-producer.jar
+ -c,--config <arg>      config file path
+ -h,--help              show this help
+ -r,--rate <arg>        messages rate per second
+ -t,--threads <arg>     number of producer threads
+ -z,--zookeeper <arg>   zookeeper connect string
 ```
 
 ## Config file
@@ -17,10 +23,7 @@ and the messages' schema.
 For example, take a look at the following config:
 
 ```yaml
-zk_connect: localhost:2181
 topic: testTopic
-threads: 2
-rate: 100
 fields:
   myConstant:
     type: constant

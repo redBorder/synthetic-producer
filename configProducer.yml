@@ -1,7 +1,4 @@
-zk_connect: localhost:2181
 topic: rb_producer
-threads: 2
-rate: 100000
 fields:
   client_latlong:
     type: constant
