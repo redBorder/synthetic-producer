@@ -1,4 +1,5 @@
 # synthetic-producer
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/75478e4c803148978811f05f732f3f3a)](https://www.codacy.com/app/redBorder/synthetic-producer)
 Generates random JSON messages and sends them to Apache Kafka.
 It uses Apache Zookeeper to discover the available brokers and partitions for a given topic.
 
