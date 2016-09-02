@@ -39,7 +39,7 @@ Using a file like that will make the producer will connect to Zookeeper at "loca
 two producing threads, and send messages to the topic "testTopic" at a constant rate of 100 msgs per
 second, which would look like the following:
 
-```
+```json
 { "myConstant": "Hello, World!", "randomNumber": 4}
 { "myConstant": "Hello, World!", "randomNumber": 12}
 { "myConstant": "Hello, World!", "randomNumber": 94}
@@ -166,6 +166,30 @@ myField:
 
 This will create values like the following: 2:34, 6:11, 1:75, 10:62...
 Of course, you can use a composition type as a component for another composition type.
+
+### set
+Generate a random sets with multiple fixed field per set
+
+Parameters:
+- numbers: The different numbers of sets
+- components: The components that form a set
+```yaml
+  set123:
+    type: set
+    numbers: 10
+    components:
+      client_mac:
+          type: mac
+          min: 00:00:00:00:00:11
+          max: 00:00:00:00:00:44
+
+      src:
+          type: ip
+          min: 80.82.34.12
+          max: 80.82.34.72
+```
+
+This will create 10 sets form by a **client_mac** of type *mac* and **src** of type *ip*. The sets are making on the init and them don't change after.
 
 ## Contributing
 
