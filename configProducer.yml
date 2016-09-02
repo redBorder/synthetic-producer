@@ -1,5 +1,18 @@
 topic: rb_producer
 fields:
+  set123:
+    type: set
+    numbers: 10
+    components:
+      client_mac:
+          type: mac
+          min: 00:00:00:00:00:11
+          max: 00:00:00:00:00:44
+
+      src:
+          type: ip
+          min: 80.82.34.12
+          max: 80.82.34.72
   client_latlong:
     type: constant
     value: '37.89,26.39'
