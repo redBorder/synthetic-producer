@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class MessageGenerator implements Generator {
-    Map<String, Type> fields = new HashMap<>();
-    Set<String> sets = new HashSet<>();
+    private Map<String, Type> fields = new HashMap<>();
+    private Set<String> sets = new HashSet<>();
 
     public MessageGenerator(Map<String, Object> fieldsDef) {
         for (Map.Entry<String, Object> entry : fieldsDef.entrySet()) {
