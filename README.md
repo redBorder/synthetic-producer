@@ -168,7 +168,7 @@ This will create values like the following: 2:34, 6:11, 1:75, 10:62...
 Of course, you can use a composition type as a component for another composition type.
 
 ### set
-Generate a random sets with multiple fixed field per set
+Generate a fixed number of sets with multiple fixed field per set.
 
 Parameters:
 - numbers: The different numbers of sets
@@ -190,6 +190,7 @@ Parameters:
 ```
 
 This will create 10 sets form by a **client_mac** of type *mac* and **src** of type *ip*. The sets are making on the init and them don't change after.
+A message has 1 set that is choose randomly from 10 sets.
 
 ## Contributing
 
