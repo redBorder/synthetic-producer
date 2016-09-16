@@ -12,7 +12,7 @@ public class RandomType implements Type {
         List<Map<String, Map<String, Object>>> components = (List<Map<String, Map<String, Object>>>) params.get("components");
 
         for (Map<String, Map<String, Object>> component : components) {
-            for(Map.Entry<String, Map<String, Object>> singleComponent : component.entrySet()) {
+            for (Map.Entry<String, Map<String, Object>> singleComponent : component.entrySet()) {
                 Type type = TypeManager.newType(singleComponent.getValue());
                 String uuid = UUID.randomUUID().toString();
                 uuids.add(uuid);
@@ -29,7 +29,12 @@ public class RandomType implements Type {
         String typeName = typesName.get(uuid);
 
         Map<String, Object> typeValue = new HashMap<>();
-        typeValue.put(typeName, type.get());
+        if (type instanceof RandomType || type instanceof SetType) {
+            typeValue.putAll((Map<String, Object>) type.get());
+        } else {
+            typeValue.put(typeName, type.get());
+        }
+
 
         return typeValue;
     }
