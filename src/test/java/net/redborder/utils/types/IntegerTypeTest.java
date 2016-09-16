@@ -21,9 +21,8 @@ public class IntegerTypeTest extends TestCase {
 
         IntegerType type = new IntegerType(opts);
         for (int i = 0; i < 999; i++) {
-            Integer resultStr = (Integer) type.get();
-            Integer result = Integer.valueOf(resultStr);
-            if (result >= MAX || result < MIN) {
+            Integer result = (Integer) type.get();
+            if (result > MAX || result < MIN) {
                 fail("Integer range violated");
             }
         }
