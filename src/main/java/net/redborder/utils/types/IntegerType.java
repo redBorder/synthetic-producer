@@ -12,14 +12,18 @@ public class IntegerType implements Type {
         this.max = (Integer) params.get("max");
         this.min = (Integer) params.get("min");
         this.negative = (Boolean) params.get("negative");
-        if (this.max == null) this.max = Integer.MAX_VALUE;
+        if (this.max == null) this.max = Integer.MAX_VALUE; else this.max += 1;
         if (this.min == null) this.min = 0;
     }
 
     @Override
     public Object get() {
-        Integer rand = (randomGen.nextInt(max - min) + min);
-        if (negative != null && negative) { rand *= -1; }
-        return rand;
+        if (!max.equals(min)) {
+            Integer rand = (randomGen.nextInt(max - min) + min);
+            if (negative != null && negative) { rand *= -1; }
+            return rand;
+        } else {
+            return max;
+        }
     }
 }
