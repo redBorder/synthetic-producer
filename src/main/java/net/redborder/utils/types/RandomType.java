@@ -9,14 +9,16 @@ public class RandomType implements Type {
     Random r = new Random();
 
     public RandomType(Map<String, Object> params) {
-        Map<String, Map<String, Object>> components = (Map<String, Map<String, Object>>) params.get("components");
+        List<Map<String, Map<String, Object>>> components = (List<Map<String, Map<String, Object>>>) params.get("components");
 
-        for (Map.Entry<String, Map<String, Object>> component : components.entrySet()) {
-            Type type = TypeManager.newType(component.getValue());
-            String uuid = UUID.randomUUID().toString();
-            uuids.add(uuid);
-            typesName.put(uuid ,component.getKey());
-            types.put(uuid, type);
+        for (Map<String, Map<String, Object>> component : components) {
+            for(Map.Entry<String, Map<String, Object>> singleComponent : component.entrySet()) {
+                Type type = TypeManager.newType(singleComponent.getValue());
+                String uuid = UUID.randomUUID().toString();
+                uuids.add(uuid);
+                typesName.put(uuid, singleComponent.getKey());
+                types.put(uuid, type);
+            }
         }
     }
 
