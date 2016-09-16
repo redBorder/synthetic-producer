@@ -1,6 +1,7 @@
 package net.redborder.utils.types;
 
 import junit.framework.TestCase;
+import net.redborder.utils.types.impl.MacType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

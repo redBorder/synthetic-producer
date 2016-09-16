@@ -1,4 +1,6 @@
-package net.redborder.utils.types;
+package net.redborder.utils.types.impl;
+
+import net.redborder.utils.types.Type;
 
 import java.util.List;
 import java.util.Map;

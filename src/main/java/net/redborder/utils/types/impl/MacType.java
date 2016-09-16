@@ -1,5 +1,6 @@
-package net.redborder.utils.types;
+package net.redborder.utils.types.impl;
 
+import net.redborder.utils.types.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

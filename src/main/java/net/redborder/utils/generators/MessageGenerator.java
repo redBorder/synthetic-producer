@@ -1,9 +1,6 @@
 package net.redborder.utils.generators;
 
-import net.redborder.utils.types.RandomType;
-import net.redborder.utils.types.SetType;
-import net.redborder.utils.types.Type;
-import net.redborder.utils.types.TypeManager;
+import net.redborder.utils.types.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,7 +16,7 @@ public class MessageGenerator implements Generator {
             String fieldName = entry.getKey();
             Map<String, Object> params = (Map<String, Object>) entry.getValue();
             Type fieldType = TypeManager.newType(params);
-            if(fieldType instanceof SetType || fieldType instanceof RandomType) mapComponents.add(fieldName);
+            if(fieldType instanceof MappedType) mapComponents.add(fieldName);
             fields.put(fieldName, fieldType);
         }
         System.out.println("MapComponents: " + mapComponents);
