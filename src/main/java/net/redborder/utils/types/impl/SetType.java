@@ -1,8 +1,12 @@
-package net.redborder.utils.types;
+package net.redborder.utils.types.impl;
+
+import net.redborder.utils.types.MappedType;
+import net.redborder.utils.types.Type;
+import net.redborder.utils.types.TypeManager;
 
 import java.util.*;
 
-public class SetType implements Type {
+public class SetType extends MappedType {
 
     private List<Map<String, Object>> sets = new ArrayList<>();
     private Integer numbers = 0;
@@ -44,7 +48,7 @@ public class SetType implements Type {
                     used.put(name, usedSet);
                 }
 
-                if (entryType.getValue() instanceof SetType) {
+                if (entryType.getValue() instanceof MappedType) {
                     set.putAll((Map<String, Object>) value);
                 } else {
                     set.put(name, value);
@@ -57,7 +61,7 @@ public class SetType implements Type {
     }
 
     @Override
-    public Object get() {
+    public Map<String, Object> getMap() {
         return sets.get(randomGen.nextInt(numbers));
     }
 }

@@ -1,6 +1,7 @@
-package net.redborder.utils.types;
+package net.redborder.utils.types.impl;
 
 import com.google.common.net.InetAddresses;
+import net.redborder.utils.types.Type;
 
 import java.net.InetAddress;
 import java.util.Map;

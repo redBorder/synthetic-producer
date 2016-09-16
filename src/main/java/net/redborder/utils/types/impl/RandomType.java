@@ -1,8 +1,12 @@
-package net.redborder.utils.types;
+package net.redborder.utils.types.impl;
+
+import net.redborder.utils.types.MappedType;
+import net.redborder.utils.types.Type;
+import net.redborder.utils.types.TypeManager;
 
 import java.util.*;
 
-public class RandomType implements Type {
+public class RandomType extends MappedType {
     Map<String, String> typesName = new HashMap<>();
     Map<String, Type> types = new HashMap<>();
     List<String> uuids = new ArrayList<>();
@@ -23,13 +27,13 @@ public class RandomType implements Type {
     }
 
     @Override
-    public Object get() {
+    public Map<String, Object> getMap() {
         String uuid = uuids.get(r.nextInt(uuids.size()));
         Type type = types.get(uuid);
         String typeName = typesName.get(uuid);
 
         Map<String, Object> typeValue = new HashMap<>();
-        if (type instanceof RandomType || type instanceof SetType) {
+        if (type instanceof MappedType) {
             typeValue.putAll((Map<String, Object>) type.get());
         } else {
             typeValue.put(typeName, type.get());

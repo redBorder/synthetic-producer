@@ -1,6 +1,8 @@
-package net.redborder.utils.types;
+package net.redborder.utils.types.impl;
 
 import com.google.common.base.Joiner;
+import net.redborder.utils.types.Type;
+import net.redborder.utils.types.TypeManager;
 
 import java.util.ArrayList;
 import java.util.List;
