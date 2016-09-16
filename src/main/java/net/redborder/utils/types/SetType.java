@@ -40,10 +40,15 @@ public class SetType implements Type {
                     }
 
                     usedSet.add(value);
+
                     used.put(name, usedSet);
                 }
 
-                set.put(name, value);
+                if (entryType.getValue() instanceof SetType) {
+                    set.putAll((Map<String, Object>) value);
+                } else {
+                    set.put(name, value);
+                }
             }
 
             sets.add(set);
