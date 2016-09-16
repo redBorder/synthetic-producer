@@ -3,8 +3,9 @@ package net.redborder.utils.types;
 import java.util.*;
 
 public class RandomType implements Type {
-    List<String> typesName = new ArrayList<>();
+    Map<String, String> typesName = new HashMap<>();
     Map<String, Type> types = new HashMap<>();
+    List<String> uuids = new ArrayList<>();
     Random r = new Random();
 
     public RandomType(Map<String, Object> params) {
@@ -12,15 +13,18 @@ public class RandomType implements Type {
 
         for (Map.Entry<String, Map<String, Object>> component : components.entrySet()) {
             Type type = TypeManager.newType(component.getValue());
-            typesName.add(component.getKey());
-            types.put(component.getKey(), type);
+            String uuid = UUID.randomUUID().toString();
+            uuids.add(uuid);
+            typesName.put(uuid ,component.getKey());
+            types.put(uuid, type);
         }
     }
 
     @Override
     public Object get() {
-        String typeName = typesName.get(r.nextInt(typesName.size()));
-        Type type = types.get(typeName);
+        String uuid = uuids.get(r.nextInt(uuids.size()));
+        Type type = types.get(uuid);
+        String typeName = typesName.get(uuid);
 
         Map<String, Object> typeValue = new HashMap<>();
         typeValue.put(typeName, type.get());
