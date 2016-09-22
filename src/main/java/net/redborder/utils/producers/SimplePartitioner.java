@@ -1,14 +1,31 @@
 package net.redborder.utils.producers;
 
-import kafka.producer.Partitioner;
-import kafka.utils.VerifiableProperties;
+
+import org.apache.kafka.clients.producer.Partitioner;
+import org.apache.kafka.common.Cluster;
+
+import java.util.Map;
 
 public class SimplePartitioner implements Partitioner {
-    public SimplePartitioner(VerifiableProperties props) { }
 
-    public int partition(Object key, int a_numPartitions) {
-        String stringKey = (String) key;
-        int offset = stringKey.hashCode();
-        return Math.abs(offset % a_numPartitions);
+    @Override
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+        if(key != null) {
+            String stringKey = key.toString();
+            int offset = stringKey.hashCode();
+            return Math.abs(offset % cluster.partitionCountForTopic(topic));
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public void configure(Map<String, ?> configs) {
+
     }
 }

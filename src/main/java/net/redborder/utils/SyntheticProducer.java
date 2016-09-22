@@ -48,7 +48,8 @@ public class SyntheticProducer {
         // Create the producers
         String zkConnect = cmdLine.getOptionValue("zookeeper");
         String topic = configFile.get("topic");
-        KafkaProducer kafkaProducer = new KafkaProducer(zkConnect, topic);
+        String partitionKey = configFile.get("partitionKey");
+        KafkaProducer kafkaProducer = new KafkaProducer(zkConnect, topic, partitionKey);
 
         // Create the scheduler
         int rate = Integer.valueOf(cmdLine.getOptionValue("rate"));
