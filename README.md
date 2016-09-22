@@ -25,6 +25,7 @@ For example, take a look at the following config:
 
 ```yaml
 topic: testTopic
+partitionKey: myPartitionKeyField
 fields:
   myConstant:
     type: constant
