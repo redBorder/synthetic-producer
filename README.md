@@ -192,6 +192,47 @@ Parameters:
 This will create 10 sets form by a **client_mac** of type *mac* and **src** of type *ip*. The sets are making on the init and them don't change after.
 A message has 1 set that is choose randomly from 10 sets.
 
+### json
+Generate a new json inside other json.
+
+Parameters:
+- components: The components that form a set
+```yaml
+  engine_id_name:
+    type: constant
+    value: IANA-L4
+  myNewJson:
+    type: json
+    components:
+        src:
+          type: ip
+          min: 192.168.0.1
+          max: 192.168.255.255
+        application_id:
+          type: composition
+          separator: ':'
+          components:
+             - type: integer
+               min: 0
+               max: 11
+             - type: integer
+               min: 0
+               max: 101
+        myNewJsonInside:
+          type: json
+          components:
+             dst:
+               type: ip
+               min: 192.168.0.1
+               max: 192.168.255.255
+```
+
+This will generate messages like this:
+
+```json
+{"myNewJson":{"myNewJsonInside":{"dst":"192.168.231.69"},"src":"192.168.161.220","application_id":"9:32"},"engine_id_name":"IANA-L4"}
+```
+
 ## Contributing
 
 1. [Fork it](https://github.com/redborder/synthetic-producer/fork)
