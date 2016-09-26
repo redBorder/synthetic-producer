@@ -298,6 +298,27 @@ This will generate messages like this:
 {"myNewJson":{"myNewJsonInside":{"dst":"192.168.231.69"},"src":"192.168.161.220","application_id":"9:32"},"engine_id_name":"IANA-L4"}
 ```
 
+### coordinates
+Generate a random latitude and longitude inside a circle that is defined using radius.
+- latPoint: The latitude center point.
+- longPoint: The longitude center point.
+- radius: The radius of the circle.
+- latitudeDim: The field name of the latitude value.
+- longitudeDim: The field name of the longitude value.
+- truncate: The decimals numbers (Default 10000, four decimals) 
+
+Example:
+```
+  coordinates:
+    type: coordinate
+    latPoint: 30.000
+    longPoint: -40.000
+    radius: 1000
+    latitudeDim: latitude
+    longitudeDim: longitude
+    truncate: 1000
+```
+
 ## Contributing
 
 1. [Fork it](https://github.com/redborder/synthetic-producer/fork)
