@@ -308,7 +308,7 @@ Generate a random latitude and longitude inside a circle that is defined using r
 - truncate: The decimals numbers (Default 10000, four decimals) 
 
 Example:
-```
+```yaml
   coordinates:
     type: coordinate
     latPoint: 30.000
