@@ -319,6 +319,35 @@ Example:
     truncate: 1000
 ```
 
+### array
+Generate array with differents components.
+- components: The differents types that build the array
+
+Example:
+```yaml
+myArray:
+    type: array
+    components:
+       field1:
+         type: json
+         components:
+            dst:
+               type: ip
+               min: 192.168.0.1
+               max: 192.168.255.255
+       field2:
+         type: constant
+         value: 5
+```
+
+This example generate an array like:
+
+```json
+{"myArray":[5,{"dst":"192.168.142.39"}]}
+{"myArray":[5,{"dst":"192.168.121.126"}]}
+{"myArray":[5,{"dst":"192.168.189.54"}]}
+```
+
 ## Contributing
 
 1. [Fork it](https://github.com/redborder/synthetic-producer/fork)
