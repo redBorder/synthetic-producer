@@ -123,6 +123,10 @@ fields:
   sensor_ip:
     type: constant
     value: 90.1.44.3
+  flow_sequence:
+    type: counter
+    min: 1
+    max: 999
   application_id_name:
     type: collection
     values:

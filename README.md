@@ -104,6 +104,22 @@ myField:
   max: 50.00
 ```
 
+### counter
+Generates an integer counter between two values
+
+Parameters:
+- min: Minimum value that counter can return (Default 0)
+- max: Maximum value that counter can return (Default Integer.MAX_VALUE)
+- direction: True if the counter goes from minimum to maximum. False if it goes from maximum to minimum. (Default true)
+
+Example:
+```yaml
+myField:
+  type: counter
+  min: 1
+  max: 10
+```
+
 ### ip
 Generates a random IP address
 
@@ -209,6 +225,37 @@ Parameters:
 
 This will create 10 sets form by a **client_mac** of type *mac* and **src** of type *ip*. The sets are making on the init and them don't change after.
 A message has 1 set that is choose randomly from 10 sets.
+
+### random
+Choose one component randomly among all the components inside it.
+
+Parameters:
+- components: List of the components that will be picked randomly.
+
+You can find a simple example below:
+
+```yaml
+  mySimpleRandom:
+    type: random
+    components:
+      -
+        myField:
+          type: integer
+          min: 101
+          max: 110
+      -
+        myField:
+          type: integer
+          min: 201
+          max: 210
+      -
+        myField:
+          type: integer
+          min: 301
+          max: 310
+```
+
+This will generate values from 101 to 110, from 201 to 210 and from 301 to 310. Also you can **nest** random types in order to get more complex combinations.
 
 ### json
 Generate a new json inside other json.
