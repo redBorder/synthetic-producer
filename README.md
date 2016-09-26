@@ -87,6 +87,23 @@ myField:
   max: 50
 ```
 
+### double
+Generates a random double
+
+Parameters:
+- min: The minimum double to be generated (Default 0.00)
+- max: The maximum double to be generated (Default Double.MAX_VALUE)
+- negative: True if the generated number must be negative (It will be multiplied by -1)
+- truncate: The decimals numbers (Default 10000, four decimals) 
+
+Example:
+```yaml
+myField:
+  type: double
+  min: 0.00
+  max: 50.00
+```
+
 ### counter
 Generates an integer counter between two values
 
@@ -279,6 +296,27 @@ This will generate messages like this:
 
 ```json
 {"myNewJson":{"myNewJsonInside":{"dst":"192.168.231.69"},"src":"192.168.161.220","application_id":"9:32"},"engine_id_name":"IANA-L4"}
+```
+
+### coordinates
+Generate a random latitude and longitude inside a circle that is defined using radius.
+- latPoint: The latitude center point.
+- longPoint: The longitude center point.
+- radius: The radius of the circle.
+- latitudeDim: The field name of the latitude value.
+- longitudeDim: The field name of the longitude value.
+- truncate: The decimals numbers (Default 10000, four decimals) 
+
+Example:
+```
+  coordinates:
+    type: coordinate
+    latPoint: 30.000
+    longPoint: -40.000
+    radius: 1000
+    latitudeDim: latitude
+    longitudeDim: longitude
+    truncate: 1000
 ```
 
 ## Contributing
