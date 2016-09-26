@@ -87,6 +87,23 @@ myField:
   max: 50
 ```
 
+### double
+Generates a random double
+
+Parameters:
+- min: The minimum double to be generated (Default 0.00)
+- max: The maximum double to be generated (Default Double.MAX_VALUE)
+- negative: True if the generated number must be negative (It will be multiplied by -1)
+- truncate: The decimals numbers (Default 10000, four decimals) 
+
+Example:
+```yaml
+myField:
+  type: double
+  min: 0.00
+  max: 50.00
+```
+
 ### ip
 Generates a random IP address
 
