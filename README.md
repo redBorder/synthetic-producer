@@ -87,6 +87,22 @@ myField:
   max: 50
 ```
 
+### counter
+Generates an integer counter between two values
+
+Parameters:
+- min: Minimum value that counter can return (Default 0)
+- max: Maximum value that counter can return (Default Integer.MAX_VALUE)
+- direction: True if the counter goes from minimum to maximum. False if it goes from maximum to minimum. (Default true)
+
+Example:
+```yaml
+myField:
+  type: counter
+  min: 1
+  max: 10
+```
+
 ### ip
 Generates a random IP address
 
