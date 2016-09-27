@@ -6,7 +6,7 @@ It uses Apache Zookeeper to discover the available brokers and partitions for a 
 Usage:
 
 ```bash
-$ java -jar target/synthetic-producer-1.3.0-selfcontained.jar
+$ java -jar target/synthetic-producer-1.4.0-selfcontained.jar
 usage: java -jar synthetic-producer.jar
  -c,--config <arg>      config file path
  -h,--help              show this help
