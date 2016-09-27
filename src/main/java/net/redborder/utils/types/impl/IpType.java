@@ -24,7 +24,7 @@ public class IpType implements Type {
 
         if (maxIpStr != null) {
             InetAddress maxIp = InetAddresses.forString(maxIpStr);
-            max = InetAddresses.coerceToInteger(maxIp);
+            max = InetAddresses.coerceToInteger(maxIp) + 1;
         } else {
             max = Integer.MAX_VALUE;
         }
