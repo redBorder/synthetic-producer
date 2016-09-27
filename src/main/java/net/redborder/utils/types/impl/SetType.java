@@ -23,7 +23,7 @@ public class SetType extends MappedType {
             componentsTypes.put(component.getKey(), TypeManager.newType(component.getValue()));
         }
 
-        for (int i = 0; i < numbers; i++) {
+        for (int i = 0; i <= numbers; i++) {
             Map<String, Object> set = new HashMap<>();
 
             for (Map.Entry<String, Type> entryType : componentsTypes.entrySet()) {
