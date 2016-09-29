@@ -12,10 +12,12 @@ public class MacType implements Type {
 
     private Random randomGen = new Random();
     private Long min, max;
+    private static String separator;
 
     public MacType(Map<String, Object> params) {
         String minMacStr = (String) params.get("min");
         String maxMacStr = (String) params.get("max");
+        separator = (String) params.get("separator");
 
         if (minMacStr != null) {
             min = longFromMac(minMacStr);
@@ -28,6 +30,8 @@ public class MacType implements Type {
         } else {
             max = Long.MAX_VALUE;
         }
+
+        if(separator == null) separator = ":";
     }
 
     @Override
@@ -51,7 +55,7 @@ public class MacType implements Type {
 
         for (byte b: addressInBytes) {
             if (builder.length() > 0) {
-                builder.append(":");
+                builder.append(separator);
             }
             builder.append(String.format("%02X", b & 0xFF));
         }
