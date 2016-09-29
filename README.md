@@ -141,6 +141,7 @@ Generates a random MAC address
 Parameters:
 - min: The minimum ip to be generated (Default 00:00:00:00:00:00)
 - max: The maximum ip to be generated (Default FF:FF:FF:FF:FF:FF)
+- separator: The string using to split the mac on the output.  
 
 Example:
 ```yaml
