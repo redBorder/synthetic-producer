@@ -321,8 +321,8 @@ Example:
 ```
 
 ### array
-Generate array with differents components.
-- components: The differents types that build the array
+Generate array with different components.
+- components: The different types that build the array
 
 Example:
 ```yaml
@@ -347,6 +347,59 @@ This example generate an array like:
 {"myArray":[5,{"dst":"192.168.142.39"}]}
 {"myArray":[5,{"dst":"192.168.121.126"}]}
 {"myArray":[5,{"dst":"192.168.189.54"}]}
+```
+
+### sequential
+Generate one component each time. The sequential restart when reach the end.
+- components: The different types that build the sequence
+
+```yaml
+sequentialField:
+ type: sequential
+ components:
+   -
+     seq1:
+       type: set
+       numbers: 1
+       components:
+         longitude:
+            type: constant
+            value: 1
+         latitude:
+            type: constant
+            value: -1
+   -
+     seq2:
+       type: set
+       numbers: 1
+       components:
+         longitude:
+            type: constant
+            value: 2
+         latitude:
+            type: constant
+            value: -2
+   -
+     seq3:
+       type: set
+       numbers: 1
+       components:
+         longitude:
+            type: constant
+            value: 3
+         latitude:
+            type: constant
+            value: -3
+```
+
+This example generate an array like:
+
+```json
+{"longitude":1,"latitude":-1}
+{"longitude":2,"latitude":-2}
+{"longitude":3,"latitude":-3}
+{"longitude":1,"latitude":-1}
+{"longitude":2,"latitude":-2}
 ```
 
 ## Contributing
