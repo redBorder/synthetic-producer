@@ -52,7 +52,7 @@ public class SyntheticProducer {
         KafkaProducer kafkaProducer = new KafkaProducer(zkConnect, topic, partitionKey);
 
         // Create the scheduler
-        int rate = Integer.valueOf(cmdLine.getOptionValue("rate"));
+        double rate = Double.valueOf(cmdLine.getOptionValue("rate"));
         int threads = Integer.valueOf(cmdLine.getOptionValue("threads"));
         Scheduler scheduler = new StandardScheduler(messageGenerator, kafkaProducer, rate, threads);
         scheduler.start();
