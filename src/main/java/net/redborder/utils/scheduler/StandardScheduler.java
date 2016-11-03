@@ -26,7 +26,7 @@ public class StandardScheduler implements Scheduler {
     private final List<SenderThread> senderThreads;
     private final Meter messages = metrics.meter("messages");
 
-    public StandardScheduler(Generator generator, IProducer producer, int rate, int threads) {
+    public StandardScheduler(Generator generator, IProducer producer, double rate, int threads) {
         this.generator = generator;
         this.producer = producer;
         this.rateLimiter = RateLimiter.create(rate);
@@ -66,12 +66,12 @@ public class StandardScheduler implements Scheduler {
             Gson gson = new Gson();
 
             while (!currentThread().isInterrupted()) {
+                rateLimiter.acquire();
                 Map<String, Object> message = generator.generate();
                 Object partitionKeyObject = message.get(producer.getPartitionKey());
                 String partitionKey = null;
                 if(partitionKeyObject != null) partitionKey = partitionKeyObject.toString();
                 String json = gson.toJson(message);
-                rateLimiter.acquire();
                 producer.send(json, partitionKey);
                 messages.mark();
             }
