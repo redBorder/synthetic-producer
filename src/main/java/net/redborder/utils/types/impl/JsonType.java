@@ -26,7 +26,7 @@ public class JsonType implements Type {
         Map<String, Object> typeValue = new HashMap<>();
 
         for (Map.Entry<String, Type> type : types.entrySet()) {
-            if (type instanceof MappedType) {
+            if (type.getValue() instanceof MappedType) {
                 typeValue.putAll((Map<String, Object>) type.getValue().get());
             } else {
                 typeValue.put(type.getKey(), type.getValue().get());
