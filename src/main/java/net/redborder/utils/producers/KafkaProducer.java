@@ -94,8 +94,19 @@ public class KafkaProducer implements IProducer {
     }
 
     @Override
-    public void send(String message, String key) {
+    public void send(String message, String key, int interval) {
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
+        producer.send(record);
+        
+        if (interval >= 1){
+          int sleepy = interval * 60000;
+          try {
+            Thread.sleep(sleepy);
+          }
+          catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+          }
+        }
         producer.send(record);
     }
 }

@@ -15,7 +15,8 @@ public class SyntheticProducer {
 
     public static void main(String[] args) {
         Options options = new Options();
-        options.addOption("r", "rate", true, "messages rate per second");
+        options.addOption("e", "events", true, "messages rate events");
+        options.addOption("i", "interval", true, "0 or empty for seconds | x amount of minutes ex. -i 8 (1 event every 8 minutes)");
         options.addOption("t", "threads", true, "number of producer threads");
         options.addOption("c", "config", true, "config file path");
         options.addOption("z", "zookeeper", true, "zookeeper connect string");
@@ -32,7 +33,7 @@ public class SyntheticProducer {
             System.exit(1);
         }
 
-        if (cmdLine.hasOption("h") || !cmdLine.hasOption("r") || !cmdLine.hasOption("t") ||
+        if (cmdLine.hasOption("h") || !cmdLine.hasOption("e") || !cmdLine.hasOption("i") ||!cmdLine.hasOption("t") ||
                 !cmdLine.hasOption("c") || !cmdLine.hasOption("z")) {
             helpFormatter.printHelp("java -jar synthetic-producer.jar", options);
             System.exit(1);
@@ -44,17 +45,16 @@ public class SyntheticProducer {
         // Create the generator
         Map<String, Object> fields = configFile.get("fields");
         MessageGenerator messageGenerator = new MessageGenerator(fields);
-
         // Create the producers
         String zkConnect = cmdLine.getOptionValue("zookeeper");
         String topic = configFile.get("topic");
         String partitionKey = configFile.get("partitionKey");
         KafkaProducer kafkaProducer = new KafkaProducer(zkConnect, topic, partitionKey);
-
         // Create the scheduler
-        double rate = Double.valueOf(cmdLine.getOptionValue("rate"));
+        int events = Integer.valueOf(cmdLine.getOptionValue("events"));
         int threads = Integer.valueOf(cmdLine.getOptionValue("threads"));
-        Scheduler scheduler = new StandardScheduler(messageGenerator, kafkaProducer, rate, threads);
+        int interval = Integer.valueOf(cmdLine.getOptionValue("interval"));
+        Scheduler scheduler = new StandardScheduler(messageGenerator, kafkaProducer, events, interval, threads);
         scheduler.start();
 
         // Shutdown hooks

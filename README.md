@@ -10,14 +10,15 @@ $ java -jar target/synthetic-producer-1.4.0-selfcontained.jar
 usage: java -jar synthetic-producer.jar
  -c,--config <arg>      config file path
  -h,--help              show this help
- -r,--rate <arg>        messages rate per second
+ -e,--events <arg>      messages rate
+ -i,--interval <arg>    events per minute (0 or blank is per second)
  -t,--threads <arg>     number of producer threads
  -z,--zookeeper <arg>   zookeeper connect string
 ```
 
 ## Config file
 
-The config file specifies the Zookeeper connection string, the rate of 
+The config file specifies the Zookeeper connection string, the rate of
 messages generated, the threads to use, the topic where you want to produce,
 and the messages' schema.
 
@@ -63,14 +64,14 @@ Generates a constant value
 
 Parameters:
  - value: The value to be generated
- 
+
 Example:
 ```yaml
 myField:
  type: constant
  value: "This is a constant"
 ```
- 
+
 ### integer
 Generates a random integer
 
@@ -94,7 +95,7 @@ Parameters:
 - min: The minimum double to be generated (Default 0.00)
 - max: The maximum double to be generated (Default Double.MAX_VALUE)
 - negative: True if the generated number must be negative (It will be multiplied by -1)
-- truncate: The decimals numbers (Default 10000, four decimals) 
+- truncate: The decimals numbers (Default 10000, four decimals)
 
 Example:
 ```yaml
@@ -306,7 +307,7 @@ Generate a random latitude and longitude inside a circle that is defined using r
 - radius: The radius of the circle.
 - latitudeDim: The field name of the latitude value.
 - longitudeDim: The field name of the longitude value.
-- truncate: The decimals numbers (Default 10000, four decimals) 
+- truncate: The decimals numbers (Default 10000, four decimals)
 
 Example:
 ```yaml

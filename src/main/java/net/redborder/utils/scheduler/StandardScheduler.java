@@ -20,17 +20,18 @@ public class StandardScheduler implements Scheduler {
     private final static Logger log = LoggerFactory.getLogger(StandardScheduler.class);
     private final static MetricRegistry metrics = new MetricRegistry();
 
+    private final int inter;
     private final Generator generator;
     private final IProducer producer;
     private final RateLimiter rateLimiter;
     private final List<SenderThread> senderThreads;
     private final Meter messages = metrics.meter("messages");
 
-    public StandardScheduler(Generator generator, IProducer producer, double rate, int threads) {
+    public StandardScheduler(Generator generator, IProducer producer, int events, int interval, int threads) {
         this.generator = generator;
         this.producer = producer;
-        this.rateLimiter = RateLimiter.create(rate);
-
+        this.inter = interval;
+        this.rateLimiter = RateLimiter.create(events);
         // Create the threads that will send the events
         this.senderThreads = new ArrayList<>();
         for (int i = 0; i < threads; i++) {
@@ -38,12 +39,21 @@ public class StandardScheduler implements Scheduler {
         }
 
         // Report the metrics of messages produced
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(metrics)
+        if (interval >= 1){
+          ConsoleReporter reporter = ConsoleReporter.forRegistry(metrics)
+                  .convertRatesTo(TimeUnit.MINUTES)
+                  .convertDurationsTo(TimeUnit.MINUTES)
+                  .build();
+          reporter.start(5, TimeUnit.SECONDS);
+
+        } else {
+          ConsoleReporter reporter = ConsoleReporter.forRegistry(metrics)
                 .convertRatesTo(TimeUnit.SECONDS)
                 .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .build();
 
-        reporter.start(5, TimeUnit.SECONDS);
+          reporter.start(5, TimeUnit.SECONDS);
+      }
     }
 
     @Override
@@ -72,7 +82,7 @@ public class StandardScheduler implements Scheduler {
                 String partitionKey = null;
                 if(partitionKeyObject != null) partitionKey = partitionKeyObject.toString();
                 String json = gson.toJson(message);
-                producer.send(json, partitionKey);
+                producer.send(json, partitionKey, inter);
                 messages.mark();
             }
         }
