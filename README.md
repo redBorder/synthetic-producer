@@ -47,6 +47,20 @@ second, which would look like the following:
 { "myConstant": "Hello, World!", "randomNumber": 33}
 ```
 
+Partition keys can also be nested in the json as long as they are not nested in an array eg.
+
+```yaml
+topic: testTopic
+partitionKey: "nested.id"
+fields:
+  nested:
+    type: json
+    components:
+        id: "id123"
+```
+
+Will result in "id123" being used as the partition key.
+
 You can find a full example of config file in [this file](https://github.com/redBorder/synthetic-producer/blob/master/configProducer.yml)
 
 ## Fields types

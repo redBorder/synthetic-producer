@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class StandardScheduler implements Scheduler {
@@ -68,13 +67,42 @@ public class StandardScheduler implements Scheduler {
             while (!currentThread().isInterrupted()) {
                 rateLimiter.acquire();
                 Map<String, Object> message = generator.generate();
-                Object partitionKeyObject = message.get(producer.getPartitionKey());
-                String partitionKey = null;
-                if(partitionKeyObject != null) partitionKey = partitionKeyObject.toString();
+                String partitionKey = extractPartitionKey(message);
                 String json = gson.toJson(message);
                 producer.send(json, partitionKey);
                 messages.mark();
             }
+        }
+    }
+
+    String extractPartitionKey(final Map<String, Object> message) {
+        try {
+            // No partition key field results in null
+            final String partitionKey = producer.getPartitionKey();
+            if (partitionKey == null) {
+                return null;
+            }
+
+            // Try to get the key from the object, then treat it as a nested path
+            Object partitionKeyObject = message.get(partitionKey);
+            if (partitionKeyObject != null) {
+                return partitionKeyObject.toString();
+            } else {
+                final String[] keys = partitionKey.split("\\.");
+                Map currentMessage = message;
+                for (final String key : keys) {
+                    partitionKeyObject = currentMessage.get(key);
+                    if (partitionKeyObject == null) {
+                        break;
+                    } else if (partitionKeyObject instanceof Map) {
+                        currentMessage = (Map) partitionKeyObject;
+                    }
+                }
+                return partitionKeyObject.toString();
+            }
+        } catch (final Exception e) {
+            log.warn(e.getMessage(), e);
+            return null;
         }
     }
 }
