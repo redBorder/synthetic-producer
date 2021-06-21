@@ -1,0 +1,141 @@
+topic: rb_bi
+fields:
+  organization_id:
+    type: constant
+    value: 1
+  sensor_name:
+    type: constant
+    value: Bodegas Monje
+  sensor_uuid:
+    type: collection
+    values:
+      - 8058ceca-75a2-493a-9fbe-6753578c14f7
+  index_partitions:
+    type: constant
+    value: 5
+  index_replicas:
+    type: constant
+    value: 1
+  http_url:
+    type: constant
+    value: https://10.1.203.3/rbdata/8058ceca-75a2-493a-9fbe-6753578c14f7/rb_bi
+  timestamp:
+    type: timestamp 
+  organization_name:
+    type: constant
+    value: Bodegas Monje
+  questionnaire:
+    type: questionnaire
+    id: 2
+    name: Cuestionario
+    questions:
+      - 
+        id: 100
+        value: '¿Eres consumidor habitual de vinos?'
+        answers:
+          type: single
+          values:
+            - Sí
+            - No
+      - 
+        id: 101
+        value: '¿Conocías los vinos de Canarias?'
+        answers:
+          type: single
+          values:
+            - Sí
+            - No        
+      - 
+        id: 102
+        value: '¿Qué vinos de Monje has catados?'
+        answers:
+          type: multiple
+          values:
+            - Hollera
+            - Listán Negro
+            - Monje Tradicional
+      - 
+        id: 103
+        value: 'Define los vinos que has probado con un adjetivo:'
+        answers:
+          type: single
+          values:
+            - bueno
+            - malo
+      - 
+        id: 104
+        value: '¿Cuál fué el que mas te gusto y por qué?'
+        answers:
+          type: single
+          values:
+            - nada
+            - todo         
+      - 
+        id: 105
+        value: '¿Cuál fué el que menos te gusto y por qué?'
+        answers:
+          type: single
+          values:
+            - nada
+            - todo
+      - 
+        id: 106
+        value: '¿Qué mejorarías/necesitan de los vinos de Monje?'
+        answers:
+          type: single
+          values:
+            - nada
+            - todo
+      - 
+        id: 107
+        value: '¿Qué opinas del precio de los vinos?'
+        answers:
+          type: single
+          values:
+            - ok
+            - not ok
+      - 
+        id: 108
+        value: '¿Cuál ha sido tu experiencia global en Bodegas Monje?'
+        answers:
+          type: single
+          values:
+            - very bad
+            - bad
+            - average
+            - good
+            - very good
+    clients:
+      -
+        client_id: 11
+        client_name: David
+        client_email: david@redborder.com
+        client_gender: male
+        client_age: 40
+        client_country: Belgium
+        client_latlong: '50.6402809,4.6667145' 
+      -
+        client_id: 15
+        client_name: Miguel
+        client_email: miguel@redborder.com
+        client_gender: male
+        client_age: 30
+        client_country: Spain
+        client_latlong: '50.6402809,4.6667145' 
+      -
+        client_id: 18
+        client_name: Javier
+        client_email: javier@redborder.com
+        client_gender: male
+        client_age: 25
+        client_country: Spain
+        client_latlong: '50.6402809,4.6667145' 
+      -
+        client_id: 20
+        client_name: Maria
+        client_email: maria@redborder.com
+        client_gender: female
+        client_age: 18
+        client_country: France
+        client_latlong: '50.6402809,4.6667145' 
+

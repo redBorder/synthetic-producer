@@ -67,13 +67,16 @@ public class StandardScheduler implements Scheduler {
 
             while (!currentThread().isInterrupted()) {
                 rateLimiter.acquire();
-                Map<String, Object> message = generator.generate();
-                Object partitionKeyObject = message.get(producer.getPartitionKey());
-                String partitionKey = null;
-                if(partitionKeyObject != null) partitionKey = partitionKeyObject.toString();
-                String json = gson.toJson(message);
-                producer.send(json, partitionKey);
-                messages.mark();
+                List<Map<String, Object>> messageList = generator.generate();
+                for (Map<String, Object> message : messageList) {
+                    log.debug(""+message);
+                    Object partitionKeyObject = message.get(producer.getPartitionKey());
+                    String partitionKey = null;
+                    if(partitionKeyObject != null) partitionKey = partitionKeyObject.toString();
+                    String json = gson.toJson(message);
+                    producer.send(json, partitionKey);
+                    messages.mark();                    
+                }
             }
         }
     }
