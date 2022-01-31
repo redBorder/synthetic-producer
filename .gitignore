@@ -4,5 +4,4 @@ target/
 *.jar
 pom.xml.releaseBackup
 release.properties
-SOURCES
 pkgs
