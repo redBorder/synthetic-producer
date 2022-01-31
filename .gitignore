@@ -4,4 +4,3 @@ target/
 *.jar
 pom.xml.releaseBackup
 release.properties
-pkgs
