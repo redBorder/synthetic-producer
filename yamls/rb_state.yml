@@ -1,0 +1,30 @@
+topic: rb_state
+fields:
+  wireless_station:
+    type: mac
+    min: 00:00:00:00:00:00
+    max: 00:00:00:00:0B:B8
+  type:
+    type: constant
+    value: snmp_apMonitor
+  timestamp:
+    type: timestamp
+  sensor_ip:
+    type: constant
+    value: 10.0.15.54
+  sensor_name:
+    type: constant
+    value:
+  client_count:
+    type: integer
+    min: 0
+    max: 300
+  sensor_uuid:
+    type: constant
+    value: '4203639814704711232'
+  status:
+    type: collection
+    values:
+      - on
+      - off
+
