@@ -24,8 +24,7 @@ export MAVEN_OPTS="-Xmx512m -Xms256m -Xss10m -XX:MaxPermSize=512m" && mvn clean 
 mkdir -p %{buildroot}/usr/share/%{name}
 mkdir -p %{buildroot}/etc/%{name}/config
 install -D -m 644 target/%{name}-*-selfcontained.jar %{buildroot}/usr/share/%{name}/%{name}.jar
-install -D -m 644 yamls/rb_flow.yml %{buildroot}/etc/%{name}/config
-install -D -m 644 yamls/rb_state.yml %{buildroot}/etc/%{name}/config
+install -D -m 644 yamls/*.yml %{buildroot}/etc/%{name}/config
 
 %clean
 rm -rf %{buildroot}
@@ -47,6 +46,7 @@ exit 0
 /usr/share/%{name}/%{name}.jar
 /etc/%{name}/config/rb_flow.yml
 /etc/%{name}/config/rb_state.yml
+/etc/%{name}/config/rb_event.yml
 
 %changelog
 * Wed Jan 26 2022 Eduardo Reyes <eareyes@redborder.com> - 0.0.1

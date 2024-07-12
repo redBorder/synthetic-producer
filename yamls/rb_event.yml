@@ -1,0 +1,144 @@
+fields:
+  topic: rb_event
+  sensor_id_snort:
+    type: constant
+    value: 0
+  action: 
+    type: constant
+    value: "alert"
+  sig_generator:
+    type: constant
+    value: 1
+  sig_id:
+    type: constant
+    value: 2027397
+  rev:
+    type: constant
+    value: 2
+  priority:
+    type: collection
+    values:
+      - "low"
+      - "medium"
+      - "high"
+      - "critical"
+  classification:
+    type: constant
+    value: "Not Suspicious Traffic"
+  msg:
+    type: constant
+    value: "Synthetic Alert"
+  payload:
+    type: constant
+    value: "8469838455647030c05e4200ea9468e8000100044895c203fcedd42e25f41673f9b268c32a632c0fd3315000"
+  l4_proto:
+    type: constant
+    value: 17
+  l4_proto_name:
+    type: constant
+    value: "udp"
+  ethsrc":
+    type: constant
+    value: "00:00:00:00:00:00"
+  ethdst":
+    type: constant
+    value: "00:00:00:00:00:00"
+ethsrc_vendor:
+  type: constant
+  value: "XEROX CORPORATION"
+ethdst_vendor:
+  type: constant
+  value: "XEROX CORPORATION"
+ethtype:
+  type: constant
+  value: 20736
+vlan:
+  type: constant
+  value: 0
+vlan_name:
+  type: constant
+  value: "0"
+udplength:
+  type: constant
+  value: 52
+ethlength:
+  type: constant
+  value: 0
+ethlength_range:
+  type: constant
+  value: "0(0-64]"
+src_port:
+  type: constant
+  value: 57621
+src_port_name:
+  type: constant
+  value: "57621"
+dst_port:
+  type: constant
+  value: 57621
+dst_port_name:
+  type: constant
+  value: "57621"
+src_asnum:
+  type: constant
+  value: 3508535562
+src:
+  type: constant
+  value: "0.0.0.0"
+src_name:
+  type: constant
+  value: "0.0.0.0"
+dst_asnum:
+  type: constant
+  value: "4280287498"
+dst_name:
+  type: constant
+  value: "9.9.9.9"
+dst:
+  type: constant
+  value: "9.9.9.9"
+ttl:
+  type: constant
+  value: 64
+tos:
+  type: constant
+  value: 0
+id:
+  type: constant
+  value: 22933
+iplen:
+  type: constant
+  value: 72
+iplen_range:
+  type: constant
+  value: "[64-128)"
+dgmlen:
+  type: constant
+  value: 72
+group_uuid:
+  type: constant
+  value: "00000000-0000-0000-0000-000000000000"
+group_name:
+  type: constant
+  value: "default"
+sensor_type:
+  type: constant
+  value: "ips"
+domain_name:
+  type: constant
+  value: "root"
+sensor_ip:
+  type: constant
+  value: "0.0.0.0"
+index_partitions:
+  type: constant
+  value: 5
+index_replicas:
+  type: constant
+  value: 1
+sensor_uuid:
+  type: constant
+  value: "00000000-0000-0000-0000-000000000000"
+sensor_name:
+  type: constant
+  value: "Virtual Synthetic Sensor"
