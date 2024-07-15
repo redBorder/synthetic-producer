@@ -51,6 +51,8 @@ exit 0
 /etc/%{name}/config/rb_event.yml
 
 %changelog
+* Mon Jul 15 2024 Luis Blanco <ljblanco@redborder.com> - 1.0.1-1
+- add all yamls in directory to include rb_event 
 * Wed Oct 4 2023 David Vanhoucke <dvanhoucke@redborder.com> - 1.0.0-1
 - sped update
 * Wed Jan 26 2022 Eduardo Reyes <eareyes@redborder.com> - 0.0.1
