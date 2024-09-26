@@ -25,8 +25,10 @@ fields:
     type: constant
     value: 'Not Suspicious Traffic'
   msg:
-    type: constant
-    value: 'ET POLICY Spotify P2P Client'
+    type: collection
+    values:
+      - 'ET DNS Query for .to TLD'
+      - 'ET POLICY Spotify P2P Client'
   payload:
     type: constant
     value: "4554205041434b4554204f5645524c4f41442041545441434b2044455445435445442046524f4d2031302e302e302e31"
