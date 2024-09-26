@@ -20,10 +20,7 @@ fields:
   priority:
     type: collection
     values:
-    # - 'low'
-    # - 'medium'
-    - 'high'
-    # - 'critical'
+      - 'high'
   classification:
     type: constant
     value: 'Not Suspicious Traffic'
@@ -84,15 +81,11 @@ fields:
     value: '57621'
   src_asnum:
     type: integer
-    # negative: true
     min: 1000000000
     max: 4000000000
   src:
     type: ip
     network: '10.1.32.0/24'
-  # src_name:
-  #   type: reference
-  #   field: src
   dst_asnum:
     type: constant
     value: '4280287498'
@@ -110,7 +103,6 @@ fields:
     value: 0
   id:
     type: integer
-    # negative: true
     min: 0
     max: 65535
   iplen:
