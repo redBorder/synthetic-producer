@@ -1,0 +1,145 @@
+topic: rb_event
+fields:
+  timestamp:
+    type: timestamp
+  sensor_id_snort:
+    type: constant
+    value: 0
+  action: 
+    type: constant
+    value: 'alert'
+  sig_generator:
+    type: constant
+    value: 1
+  sig_id:
+    type: constant
+    value: 2027397
+  rev:
+    type: constant
+    value: 2
+  priority:
+    type: collection
+    values:
+      - 'high'
+  classification:
+    type: constant
+    value: 'Not Suspicious Traffic'
+  msg:
+    type: collection
+    values:
+      - 'ET DNS Query for .to TLD'
+      - 'ET POLICY Spotify P2P Client'
+  payload:
+    type: constant
+    value: "4554205041434b4554204f5645524c4f41442041545441434b2044455445435445442046524f4d2031302e302e302e31"
+  l4_proto:
+    type: constant
+    value: 17
+  l4_proto_name:
+    type: constant
+    value: 'udp'
+  ethsrc:
+    type: constant
+    value: '00:00:00:00:00:00'
+  ethdst:
+    type: constant
+    value: '00:00:00:00:00:00'
+  ethsrc_vendor:
+    type: constant
+    value: 'XEROX CORPORATION'
+  ethdst_vendor:
+    type: constant
+    value: 'XEROX CORPORATION'
+  ethtype:
+    type: integer
+    min: 16384
+    max: 32767
+  vlan:
+    type: constant
+    value: 0
+  vlan_name:
+    type: constant
+    value: '0'
+  udplength:
+    type: constant
+    value: 60674
+  ethlength:
+    type: constant
+    value: 0
+  ethlength_range:
+    type: constant
+    value: '0(0-64]'
+  src_port:
+    type: constant
+    value: 57621
+  src_port_name:
+    type: constant
+    value: '57621'
+  dst_port:
+    type: constant
+    value: 57621
+  dst_port_name:
+    type: constant
+    value: '57621'
+  src_asnum:
+    type: integer
+    min: 1000000000
+    max: 4000000000
+  src:
+    type: ip
+    network: '10.1.32.0/24'
+  dst_asnum:
+    type: constant
+    value: '4280287498'
+  dst:
+    type: constant
+    value: '10.1.32.255'
+  dst_name:
+    type: constant
+    value: '10.1.32.255'
+  ttl:
+    type: constant
+    value: 64
+  tos:
+    type: constant
+    value: 0
+  id:
+    type: integer
+    min: 0
+    max: 65535
+  iplen:
+    type: constant
+    value: 72
+  iplen_range:
+    type: constant
+    value: '[64-128)'
+  dgmlen:
+    type: constant
+    value: 72
+  group_uuid:
+    type: constant
+    value: '0277c7e0-aca7-42e9-807e-ed37dafb9d33'
+  group_name:
+    type: constant
+    value: 'default'
+  sensor_type:
+    type: constant
+    value: 'ips'
+  domain_name:
+    type: constant
+    value: 'root'
+  sensor_ip:
+    type: constant
+    value: '10.1.203.204'
+  index_partitions:
+    type: constant
+    value: 5
+  index_replicas:
+    type: constant
+    value: 1
+  sensor_uuid:
+    type: constant
+    value: '8d4ba045-5420-489f-86e6-e2512d094a44'
+  sensor_name:
+    type: constant
+    value: 'ips'
