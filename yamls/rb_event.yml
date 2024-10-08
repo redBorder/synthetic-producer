@@ -29,6 +29,7 @@ fields:
     values:
       - 'ET DNS Query for .to TLD'
       - 'ET POLICY Spotify P2P Client'
+      - 'OS-WINDOWS Microsoft Windows SMB remote code execution attempt'
   payload:
     type: constant
     value: "4554205041434b4554204f5645524c4f41442041545441434b2044455445435445442046524f4d2031302e302e302e31"
@@ -87,7 +88,9 @@ fields:
     max: 4000000000
   src:
     type: ip
-    network: '10.1.32.0/24'
+    network: 
+      - '10.1.32.0/24'
+      - '192.168.1.0/24'
   dst_asnum:
     type: constant
     value: '4280287498'
