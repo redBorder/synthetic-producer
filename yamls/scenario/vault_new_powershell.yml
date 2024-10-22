@@ -61,3 +61,6 @@ fields:
   service_provider_uuid:
     type: constant
     value: 'c2238202-ce42-4235-814f-91d2e6e0122a'
+  priority:
+    type: constant
+    value: 'critical'
