@@ -1,0 +1,63 @@
+topic: rb_vault
+fields:
+  message:
+    type: constant
+    value: 'powershell file setup.ps1 in path Windows/system'
+  timestamp:
+    type: timestamp
+  hostname:
+    type: constant
+    value: 'TechCorp'
+  fromhost_ip:
+    type: collection
+    values:
+      - '192.168.0.12'
+      - '192.168.0.10'
+  app_name:
+    type: collection
+    values:
+      - 'smartd'
+      - 'systemd'
+      - 'CROND'
+      - 'auditd'
+  procid:
+    type: collection
+    values:
+      - '-'
+      - '6714'
+      - '5059'
+      - '1819'
+      - '13117'
+      - '7745'
+      - '9863'
+      - '32278'
+  sensor_ip:
+    type: constant
+    value: '10.0.250.0'
+  sensor_name:
+    type: constant
+    value: 'Log Vault'
+  sensor_uuid:
+    type: constant
+    value: '49184ff9-54be-455d-8f82-6c9d9dfcd81e'
+  sensor_id:
+    type: integer
+    value: 22
+  namespace:
+    type: constant
+    value: 'Namespace Level Alfa'
+  namespace_uuid:
+    type: constant
+    value: '352369f8-60fb-4b72-a603-d1d8393cca0a'
+  organization:
+    type: constant
+    value: 'TechSecure Corp'
+  organization_uuid:
+    type: constant
+    value: 'c2238202-ce42-4235-814f-91d2e6e0122a'
+  service_provider:
+    type: constant
+    value: 'TechSecure Corp'
+  service_provider_uuid:
+    type: constant
+    value: 'c2238202-ce42-4235-814f-91d2e6e0122a'
