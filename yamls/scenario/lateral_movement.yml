@@ -1,0 +1,67 @@
+topic: rb_event
+fields:
+  timestamp:
+    type: timestamp
+  action:
+    type: constant
+    value: 'alert'
+  priority:
+    type: constant
+    value: 'High'
+  classification:
+    type: constant
+    value: 'Test'
+  msg:
+    type: constant
+    value: 'POLICY-OTHER use of psexec remote administration tool'
+  payload:
+    type: constant
+    value: '73726567417265736F75746F722E436F726574726F737465722E437573746F6D65722E4E65775F4974656D205C4D696170706C69636174696F6E2E70776F772E4B6F706572696E672E417267757365727261636F69737469732E484B43552E5C4D696170706C69636174696F6E5C4D694170706C69636174696F6E205665727375732E486F6C614D756E646F726272696172732E486B43552E4E65775F4974656D205354505265673274636F726574726F737465722E4E65775F4974656D20566973696F6E202053656E64696E672E4D726F6F7420546F6B656E68616D616E204874617420436C61757365'
+  vlan:
+    type: constant
+    value: 0
+  src_port:
+    type: constant
+    value: 7846
+  dst_port:
+    type: constant
+    value: 3388
+  src:
+    type: constant
+    value: '192.168.0.12'
+  dst:
+    type: collection
+    values:
+      - '192.168.0.1'
+      - '192.168.0.10'
+      - '192.168.0.11'
+  organization:
+    type: constant
+    value: 'TechSecure Corp.'
+  organization_uuid:
+    type: constant
+    value: '4b839195-3d3a-4983-abc0-9731ea731cab'
+  sensor_uuid:
+    type: constant
+    value: '87845e36-186f-420b-b396-147e523a12c1'
+  sensor_name:
+    type: constant
+    value: 'rbIntrusionProbe'
+  sensor_type:
+    type: constant
+    value: 'ips'
+  sensor_ip:
+    type: constant
+    value: '10.0.250.195'
+  sid:
+    type: constant
+    value: 24008
+  sig_generator:
+    type: integer
+    value: 1
+  sig_id:
+    type: integer
+    value: 1
+  namespace_uuid:
+    type: constant
+    value: '352369f8-60fb-4b72-a603-d1d8393cca0a'
