@@ -1,0 +1,71 @@
+topic: rb_event
+fields:
+  timestamp:
+    type: timestamp
+  action:
+    type: constant
+    value: 'alert'
+  priority:
+    type: constant
+    value: 'High'
+  classification:
+    type: constant
+    value: 'Test'
+  msg:
+    type: constant
+    value: 'ET SCAN Potential SSH Scan OUTBOUND'
+  payload:
+    type: constant
+    value: '7373683a20636f6e6e65637420746f20686f7374203139322e3136382e302e3120706f72742032323a20436f6e6e656374696f6e2072656675736564'
+  vlan:
+    type: constant
+    value: 0
+  src_port:
+    type: constant
+    value: 12345
+  dst_port:
+    type: constant
+    value: 22
+  dst:
+    type: constant
+    value: '94.141.120.194'
+  src:
+    type: collection
+    values: 
+      - '192.168.0.1'
+      - '192.168.0.10'
+      - '192.168.0.11'
+      - '192.168.0.12'
+  organization:
+    type: constant
+    value: 'TechSecure Corp.'
+  organization_uuid:
+    type: constant
+    value: 'f5c0077f-752a-4b2f-a265-af69f71c55a9'
+  service_provider:
+    type: constant
+    value: 'RedBorderServiceProvider'
+  service_provider_uuid:
+    type: constant
+    value: '3fe4346b-99a9-435b-929b-641e9da3c542'
+  sensor_uuid:
+    type: constant
+    value: '5a0f1210-3b72-48ab-9910-13119a13dd3f'
+  sensor_name:
+    type: constant
+    value: 'rbIntrusionProbe'
+  sensor_type:
+    type: constant
+    value: 'ips'
+  sensor_ip:
+    type: constant
+    value: '10.0.250.85'
+  sid: 
+    type: constant
+    value: 2003068
+  sig_generator:
+    type: integer
+    value: 1
+  sig_id:
+    type: integer
+    value: 1

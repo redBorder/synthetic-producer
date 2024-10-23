@@ -1,0 +1,18 @@
+topic: sflow
+fields:
+  timestamp:
+    type: timestamp
+  sensor_name: 
+    type: constant
+    value: sflowprobe
+  sensor_ip:
+    type: constant
+    value: 10.1.209.253
+  sensor_uuid: 
+    type: "constant"
+    value: "aaaaaaaa-bbbb-cccc-dddd-ffffffffffff"
+  observation_id:
+    type: "constant" # integer?
+    value: "0"
+  
+  {"cisco_src_vlan": "69", "cisco_dst_vlan": "69", "src_vlan": "69", "dst_vlan": "69", "vlan_in": "69", "vlan_out": "69", "timestamp_arrival": "2024-08-22 16:22:15.877120","stamp_updated": "2024-08-22 16:22:16", "event_type": "purge", "tag": 1, "tag2": 0, "class": "Unknown/Unknown", "mac_src": "2c:fd:a1:73:8a:eb", "mac_dst": "ec:ce:13:ae:35:b3", "peer_ip_src": "10.1.209.253", "peer_ip_dst": "", "iface_in": 1, "iface_out": 1073741823, "ip_src": "10.1.32.160", "ip_dst": "10.1.150.2", "port_src": 60212, "port_dst": 443, "country_ip_src": "", "country_ip_dst": "", "tcp_flags": "24", "ip_proto": "tcp", "tos": 0, "sampling_rate": 20, "export_proto_seqno": 63108, "stamp_inserted": "2024-08-22 14:05:00", "packets": 1, "bytes": 109, "writer_id": "default_kafka/376004"}
