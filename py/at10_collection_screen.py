@@ -30,7 +30,7 @@ address_malicious = ["80.66.76.130", "91.238.181.32", "185.170.144.3", "185.234.
 
 # Definición de las firmas para el sig_id y sus revisiones (rev)
 sig_ids = [
-    (7605, 1, 'MALWARE-BACKDOOR katux 2.0 runtime detection - screen capture	')
+    (7605, 1, 'MALWARE-BACKDOOR katux 2.0 runtime detection - screen capture')
 ]
 
 # Función para generar direcciones IP realistas
