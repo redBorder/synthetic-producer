@@ -17,7 +17,7 @@ def generate_active_scanning_event():
         "sensor_id_snort": 0,
         "action": "alert",
         "sig_generator": 1,
-        "sig_id": random.choice([2001583, 2001581, 2001569, 2001579]),  # Selecciona un sig_id aleatorio
+        "sig_id": 2001583,
         "rev": 3,
         "priority": "low",
         "classification": "Misc activity",
