@@ -13,19 +13,19 @@ def random_mac():
 
 # Active Scanning T1595
 def generate_active_scanning_event():
-    lan_ip = random.choice([
-        "192.168.0.1",
-        "192.168.0.10",
-        "192.168.0.20",
-        "192.168.0.30",
-        "192.168.0.100",
-        "192.168.0.110",
-        "192.168.3.10",
-        "192.168.3.10",
-        "192.168.3.11",
-        "192.168.3.12"
-        ])
-
+    lan_devices = {
+        "192.168.0.1": "00:1a:2b:3c:4d:5e",
+        "192.168.0.10": "00:2b:3c:4d:5e:6f",
+        "192.168.0.20": "00:3c:4d:5e:6f:7a",
+        "192.168.0.30": "00:4d:5e:6f:7a:8b",
+        "192.168.0.100": "00:5e:6f:7a:8b:9c",
+        "192.168.0.110": "00:6f:7a:8b:9c:0d",
+        "192.168.3.10": "00:7a:8b:9c:0d:1e",
+        "192.168.3.10": "00:8b:9c:0d:1e:2f",
+        "192.168.3.11": "00:9c:0d:1e:2f:3a",
+        "192.168.3.12": "00:0d:1e:2f:3a:4b"
+    }
+    lan_ip, lan_mac = random.choice(list(lan_devices.items()))   
     port_src = random.choice(list(range(10000,60000)))
     malicious_ips= random.choice(["74.125.250.244", "74.125.250.245", "74.125.250.246", "74.125.250.247", "74.125.250.248", "90.167.13.113", "35.230.139.19", "92.249.48.244"])
     
@@ -42,7 +42,7 @@ def generate_active_scanning_event():
         "l4_proto_name": "udp",
         "l4_proto": 17,
         "ethsrc": random_mac(),
-        "ethdst": random_mac(),
+        "ethdst": lan_mac,
         "ethsrc_vendor": random.choice(["Cisco Systems, Inc", "Dell Inc.", "HP Inc.", "Intel Corporation", "Apple Inc.", "Samsung Electronics", "Juniper Networks", "IBM Corp.", "Sony Corporation", "LG Electronics", "Huawei Technologies", "ASUS", "Lenovo", "D-Link Corporation", "NetGear", "TP-Link Technologies"]),
         "ethdst_vendor": "ASUSTek COMPUTER INC.", # maybe change between cisco and asus
         "ethtype": 33024,
