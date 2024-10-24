@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 
 # This script is used to run different incidentes that are following a full path of Mitre tactics, by running the corresponding scripts.
 # Each of the scripts is responsible for running the incident that triggers the corresponding tactic.
@@ -25,18 +25,37 @@ import os
 import time
 
 for script in SCRIPTS_PATH:
+    print('Starting attack script')
+    os.system(f'figlet "{os.path.basename(script)}"')   
     if os.path.exists(script):
         if script.endswith('.yml'):
             os.system(f'rb_synthetic_producer -r 1 -p 1 -c {script} &')
-            time.sleep(30)
+            time.sleep(10)
             os.system(f'pkill -f "rb_synthetic_producer -r 1 -p 1 -c {script}"')
             time.sleep(5)
             # Check if process was killed
             check_process = os.popen(f'pgrep -f "rb_synthetic_producer -r 1 -p 1 -c {script}"').read()
-            if check_process:
+            while check_process:
+                os.system('figlet "WARNING: Process still running"')
                 print(f"Warning: Process for {script} is still running")
+                os.system(f'pkill -f "rb_synthetic_producer -r 1 -p 1 -c {script}"')
+                time.sleep(5)
+                check_process = os.popen(f'pgrep -f "rb_synthetic_producer -r 1 -p 1 -c {script}"').read()
             
         else:
             # Wait 10' for each attack
-            os.system(f'python3 {script}')     
-        time.sleep(600)
+            os.system(f'python3 {script}')
+            time.sleep(5)
+            os.system(f'pkill -f "python3 {script}"')
+            time.sleep(2)
+            # Check if process was killed
+            check_process = os.popen(f'pgrep -f "python3 {script}"').read()
+            while check_process:
+                os.system('figlet "WARNING: Process still running"')
+                print(f"Warning: Process for {script} is still running")
+                os.system(f'pkill -f "python3 {script}"')
+                time.sleep(5)
+                check_process = os.popen(f'pgrep -f "python3 {script}"').read()            
+    # Time between incidents
+    # time.sleep(600)
+    time.sleep(10) #test time in secs 
