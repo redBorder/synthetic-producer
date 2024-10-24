@@ -3,7 +3,7 @@ from kafka import KafkaProducer
 import json
 import time
 import random
-from assets import lan_devices, random_malicios_ip as malicious_ips, random_non_standard_port as port_src, random_mac
+from assets import lan_devices, random_malicios_ip as malicious_ips, random_port, random_mac
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
@@ -12,7 +12,7 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 # Active Scanning T1595
 def generate_active_scanning_event():
     lan_ip, lan_mac = random.choice(list(lan_devices.items()))   
-    
+    port_src = random_port
     return {
         "timestamp": int(time.time()),
         "sensor_id_snort": 0,
@@ -38,7 +38,7 @@ def generate_active_scanning_event():
         "ethlength": 0,
         "ethlength_range": "0(0-64]",
         "src_port": port_src,
-        "src_port_name": port_src,
+        "src_port_name": str(port_src),
         "dst_port": 1433,
         "dst_port_name": "1433",
         "src_asnum": 4110056778,
