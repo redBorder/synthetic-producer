@@ -8,10 +8,27 @@ import random
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                          value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
-# Función para generar eventos de escaneo activo (Active Scanning T1595)
+def random_mac():
+    return f"{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}"
+
+# Active Scanning T1595
 def generate_active_scanning_event():
-    ip_dst = random.choice(["192.168.0.100", "192.168.0.110", "192.168.0.30", "192.168.0.1", "192.168.3.10", "192.168.0.20", "192.168.3.10", "192.168.3.11", "192.168.3.12"])
+    lan_ip = random.choice([
+        "192.168.0.1",
+        "192.168.0.10",
+        "192.168.0.20",
+        "192.168.0.30",
+        "192.168.0.100",
+        "192.168.0.110",
+        "192.168.3.10",
+        "192.168.3.10",
+        "192.168.3.11",
+        "192.168.3.12"
+        ])
+
     port_src = random.choice(list(range(10000,60000)))
+    malicious_ips= random.choice(["74.125.250.244", "74.125.250.245", "74.125.250.246", "74.125.250.247", "74.125.250.248", "90.167.13.113", "35.230.139.19", "92.249.48.244"])
+    
     return {
         "timestamp": int(time.time()),
         "sensor_id_snort": 0,
@@ -24,10 +41,10 @@ def generate_active_scanning_event():
         "msg": "ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection",
         "l4_proto_name": "udp",
         "l4_proto": 17,
-        "ethsrc": "ec:ce:13:ae:32:a3",
-        "ethdst": "50:eb:f6:8e:cf:30",
-        "ethsrc_vendor": "Cisco Systems, Inc",
-        "ethdst_vendor": "ASUSTek COMPUTER INC.",
+        "ethsrc": random_mac(),
+        "ethdst": random_mac(),
+        "ethsrc_vendor": random.choice(["Cisco Systems, Inc", "Dell Inc.", "HP Inc.", "Intel Corporation", "Apple Inc.", "Samsung Electronics", "Juniper Networks", "IBM Corp.", "Sony Corporation", "LG Electronics", "Huawei Technologies", "ASUS", "Lenovo", "D-Link Corporation", "NetGear", "TP-Link Technologies"]),
+        "ethdst_vendor": "ASUSTek COMPUTER INC.", # maybe change between cisco and asus
         "ethtype": 33024,
         "vlan": 30,
         "vlan_name": "30",
@@ -41,11 +58,11 @@ def generate_active_scanning_event():
         "dst_port": 1433,
         "dst_port_name": "1433",
         "src_asnum": 4110056778,
-        "src": "74.125.250.244",
-        "src_name": "74.125.250.244",
+        "src": malicious_ips,
+        "src_name": malicious_ips,
         "dst_asnum": "3038642698",
-        "dst_name": ip_dst,
-        "dst": ip_dst,
+        "dst_name": lan_ip,
+        "dst": lan_ip,
         "ttl": 47,
         "tos": 0,
         "id": 0,
