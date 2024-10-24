@@ -11,7 +11,8 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 
 # Función para generar eventos de escaneo activo (Active Scanning T1595)
 def generate_event():
-    port = random_port()
+    src_port = random_port()
+    dst_port = random_port()
     return {
         "src": "192.168.3.12",
         "dst": "192.168.3.10",
@@ -39,10 +40,10 @@ def generate_event():
         "udplength": 72,
         "ethlength": 0,
         "ethlength_range": "0(0-64]",
-        "src_port": port,
-        "src_port_name": str(port),
-        "dst_port": port,
-        "dst_port_name": str(port),
+        "src_port": src_port,
+        "src_port_name": str(src_port),
+        "dst_port": dst_port,
+        "dst_port_name": str(dst_port),
         "src_asnum": 4110056778,
         "dst_asnum": "3038642698",
         "ttl": 47,
