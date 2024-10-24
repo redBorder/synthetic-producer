@@ -3,6 +3,7 @@ from kafka import KafkaProducer
 import json
 import time
 import random
+from assets import lan_devices, random_port
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
@@ -10,24 +11,25 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 
 # Función para generar eventos de escaneo activo (Active Scanning T1595)
 def generate_event():
+    port = random_port()
     return {
-        "dst": "192.168.0.1",
-        "src": "192.168.0.12",
+        "src": "192.168.3.12",
+        "dst": "192.168.3.10",
+        "ethsrc": lan_devices['192.168.3.12'],
+        "ethdst": lan_devices['192.168.3.10'],
         "payload": "73726567417265736f75746f722e436f726574726f737465722e437573746f6d65722e4e65775f4974656d205c4d696170706c69636174696f6e2e70776f772e4b6f706572696e672e417267757365727261636f69737469732e484b43552e5c4d696170706c69636174696f6e5c4d694170706c69636174696f6e205665727375732e486f6c614d756e646f726272696172732e486b43552e4e65775f4974656d205354505265673274636f726574726f737465722e4e65775f4974656d20566973696f6e202053656e64696e672e4d726f6f7420546f6b656e68616d616e204874617420436c61757365",
         "timestamp": int(time.time()),
         "sensor_id_snort": 0,
         "action": "alert",
         "sig_generator": 1,
-        "sig_id": random.choice([2001583, 2001581, 2001569, 2001579]),  # Selecciona un sig_id aleatorio
         "rev": 3,
         "priority": "high",
         "classification": "Trojan",
-        "msg": "WIN.TROJAN.MOSERPASS OUTBOUND REQUEST",
+        "msg": 'POLICY-OTHER use of psexec remote administration tool',
+        "sig_id": 24008,  # Selecciona un sig_id aleatorio
         "l4_proto_name": "udp",
         "l4_proto": 17,
-        "ethsrc": "ec:ce:13:ae:32:a3",
-        "ethdst": "50:eb:f6:8e:cf:30",
-        "ethsrc_vendor": "Cisco Systems, Inc",
+        "ethsrc_vendor": "ASUSTek COMPUTER INC.",
         "ethdst_vendor": "ASUSTek COMPUTER INC.",
         "ethtype": 33024,
         "vlan": 30,
@@ -37,10 +39,10 @@ def generate_event():
         "udplength": 72,
         "ethlength": 0,
         "ethlength_range": "0(0-64]",
-        "src_port": 3478,
-        "src_port_name": "3478",
-        "dst_port": 55759,
-        "dst_port_name": "55759",
+        "src_port": port,
+        "src_port_name": str(port),
+        "dst_port": port,
+        "dst_port_name": str(port),
         "src_asnum": 4110056778,
         "dst_asnum": "3038642698",
         "ttl": 47,
