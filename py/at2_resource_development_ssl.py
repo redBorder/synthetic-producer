@@ -133,7 +133,7 @@ def run_producer(duration):
             data = generate_event()
             producer.send('rb_event', value=data)  # Envía los eventos al topic de Kafka
             print(f'Data sent: {data}')
-            time.sleep(1)  # Intervalo entre eventos
+            time.sleep(0.1)  # Intervalo entre eventos
     except KeyboardInterrupt:
         pass
     finally:
