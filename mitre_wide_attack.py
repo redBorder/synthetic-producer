@@ -56,5 +56,5 @@ while True:
         # time.sleep(TIME_TO_NEXT_ATTACK)
     
     next_run = datetime.now() + timedelta(hours=2)
-    os.system(f'figlet "Repeating scenario at {next_run.strftime("%H:%M")}"')
+    os.system(f'figlet "Repeating scenario at {next_run.strftime("%H:%M")} UTC"')
     time.sleep(7200) # Back in 2 hours
