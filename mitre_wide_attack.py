@@ -16,6 +16,7 @@ SCRIPTS_PATH = [
 '/root/vimesa/scripts/attacks/at7_defense_evasion.py',
 '/root/vimesa/scripts/attacks/at8_credential_access.py',
 '/root/vimesa/scripts/attacks/at9_lateral_movement.py',
+'/root/vimesa/scripts/attacks/at9_discovery.py',
 '/root/vimesa/scripts/attacks/at10_collection_screen.py',
 '/root/vimesa/scripts/attacks/at11_exfiltration_dropbox.py',
 '/root/vimesa/scripts/attacks/at12_cnc.py',
