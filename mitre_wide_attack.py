@@ -23,6 +23,7 @@ SCRIPTS_PATH = [
 
 import os
 import time
+from datetime import datetime, timedelta
 TEST_TIME=10
 TIME_TO_NEXT_ATTACK=600
 def check_and_kill_process(script, command):
@@ -36,19 +37,24 @@ def check_and_kill_process(script, command):
         time.sleep(5)
         check_process = os.popen(f'pgrep -f "{command}"').read()
 
-for script in SCRIPTS_PATH:
-    print('Starting attack script')
-    os.system(f'figlet "{os.path.basename(script)}"')   
-    if os.path.exists(script):
-        if script.endswith('.yml'):
-            command = f'rb_synthetic_producer -r 1 -p 1 -c {script}'
-            os.system(f'{command} &')
-            time.sleep(10) # because synthetic needs more time to start
-            check_and_kill_process(script, command)
-        else:
-            command = f'python3 {script}'
-            os.system(command)
-            time.sleep(5)
-            check_and_kill_process(script, command)
-    time.sleep(TEST_TIME)
-    # time.sleep(TIME_TO_NEXT_ATTACK)
+while True:
+    for script in SCRIPTS_PATH:
+        print('Starting attack script')
+        os.system(f'figlet "{os.path.basename(script)}"')   
+        if os.path.exists(script):
+            if script.endswith('.yml'):
+                command = f'rb_synthetic_producer -r 1 -p 1 -c {script}'
+                os.system(f'{command} &')
+                time.sleep(10) # because synthetic needs more time to start
+                check_and_kill_process(script, command)
+            else:
+                command = f'python3 {script}'
+                os.system(command)
+                time.sleep(5)
+                check_and_kill_process(script, command)
+        time.sleep(TEST_TIME)
+        # time.sleep(TIME_TO_NEXT_ATTACK)
+    
+    next_run = datetime.now() + timedelta(hours=2)
+    os.system(f'figlet "Repeating scenario at {next_run.strftime("%H:%M")}"')
+    time.sleep(7200) # Back in 2 hours
