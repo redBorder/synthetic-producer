@@ -104,15 +104,21 @@ def generate_event():
 # Produce mensajes continuamente
 message_count = 0
 
-try:
-    while True:
-        data = generate_event()
-        producer.send('rb_event', value=data)  # Nombre del topic
-        message_count += 1  # Incrementa el contador de mensajes enviados
-        print(f'Data sent: {data}')
-        time.sleep(1)  # Ajusta el intervalo según tus necesidades
-except KeyboardInterrupt:
-    pass
-finally:
-    producer.close()
-    print(f'Total messages sent: {message_count}')
+def run_producer(duration):
+    start_time = time.time()
+    try:
+        while duration < 0 or time.time() - start_time < duration:
+            data = generate_event()
+            producer.send('rb_event', value=data)  # Envía los eventos al topic de Kafka
+            print(f'Data sent: {data}')
+            time.sleep(1)  # Intervalo entre eventos
+    except KeyboardInterrupt:
+        pass
+    finally:
+        producer.close()
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--duration', type=int, default=5, help='Duration in seconds (default: 5)')
+    args = parser.parse_args()
+    run_producer(args.duration)

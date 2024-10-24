@@ -91,13 +91,23 @@ def generate_active_scanning_event():
     }
 
 # Produce mensajes continuamente simulando eventos de escaneo activo
-try:
-    while True:
-        data = generate_active_scanning_event()
-        producer.send('rb_event', value=data)  # Envía los eventos al topic de Kafka
-        print(f'Data sent: {data}')
-        time.sleep(1)  # Intervalo entre eventos
-except KeyboardInterrupt:
-    pass
-finally:
-    producer.close()
+def run_producer(duration):
+    start_time = time.time()
+    try:
+        while duration < 0 or time.time() - start_time < duration:
+            data = generate_active_scanning_event()
+            producer.send('rb_event', value=data)  # Envía los eventos al topic de Kafka
+            print(f'Data sent: {data}')
+            time.sleep(1)  # Intervalo entre eventos
+    except KeyboardInterrupt:
+        pass
+    finally:
+        producer.close()
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--duration', type=int, default=5, help='Duration in seconds (default: 5)')
+    args = parser.parse_args()
+    run_producer(args.duration)
+    
