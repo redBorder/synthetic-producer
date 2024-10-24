@@ -23,39 +23,32 @@ SCRIPTS_PATH = [
 
 import os
 import time
+TEST_TIME=10
+TIME_TO_NEXT_ATTACK=600
+def check_and_kill_process(script, command):
+    os.system(f'pkill -f "{command}"')
+    time.sleep(5)
+    check_process = os.popen(f'pgrep -f "{command}"').read()
+    while check_process:
+        os.system('figlet "WARNING: Process still running"')
+        print(f"Warning: Process for {script} is still running")
+        os.system(f'pkill -f "{command}"')
+        time.sleep(5)
+        check_process = os.popen(f'pgrep -f "{command}"').read()
 
 for script in SCRIPTS_PATH:
     print('Starting attack script')
     os.system(f'figlet "{os.path.basename(script)}"')   
     if os.path.exists(script):
         if script.endswith('.yml'):
-            os.system(f'rb_synthetic_producer -r 1 -p 1 -c {script} &')
-            time.sleep(10)
-            os.system(f'pkill -f "rb_synthetic_producer -r 1 -p 1 -c {script}"')
-            time.sleep(5)
-            # Check if process was killed
-            check_process = os.popen(f'pgrep -f "rb_synthetic_producer -r 1 -p 1 -c {script}"').read()
-            while check_process:
-                os.system('figlet "WARNING: Process still running"')
-                print(f"Warning: Process for {script} is still running")
-                os.system(f'pkill -f "rb_synthetic_producer -r 1 -p 1 -c {script}"')
-                time.sleep(5)
-                check_process = os.popen(f'pgrep -f "rb_synthetic_producer -r 1 -p 1 -c {script}"').read()
-            
+            command = f'rb_synthetic_producer -r 1 -p 1 -c {script}'
+            os.system(f'{command} &')
+            time.sleep(10) # because synthetic needs more time to start
+            check_and_kill_process(script, command)
         else:
-            # Wait 10' for each attack
-            os.system(f'python3 {script}')
+            command = f'python3 {script}'
+            os.system(command)
             time.sleep(5)
-            os.system(f'pkill -f "python3 {script}"')
-            time.sleep(2)
-            # Check if process was killed
-            check_process = os.popen(f'pgrep -f "python3 {script}"').read()
-            while check_process:
-                os.system('figlet "WARNING: Process still running"')
-                print(f"Warning: Process for {script} is still running")
-                os.system(f'pkill -f "python3 {script}"')
-                time.sleep(5)
-                check_process = os.popen(f'pgrep -f "python3 {script}"').read()            
-    # Time between incidents
-    # time.sleep(600)
-    time.sleep(10) #test time in secs 
+            check_and_kill_process(script, command)
+    time.sleep(TEST_TIME)
+    # time.sleep(TIME_TO_NEXT_ATTACK)
