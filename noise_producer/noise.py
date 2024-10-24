@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from kafka import KafkaProducer
 from faker import Faker
 import json
@@ -6,6 +8,7 @@ import random
 import os
 import string
 from datetime import datetime
+import argparse
 
 # Configura el productor de Kafka
 producer = KafkaProducer(
@@ -156,7 +159,7 @@ def generate_vault(data):
     return vault_data
 
 # Función para intercalar la generación de eventos y enviar a diferentes topics
-def send_interleaved_events():
+def send_interleaved_events(duration):
     data = load_json_data('data.json')  # Cargar el archivo unificado
     event_generators = [
         (generate_intrusion, 'rb_event'),
@@ -164,18 +167,22 @@ def send_interleaved_events():
         (generate_vault, 'rb_vault')
     ]
 
+    start_time = time.time()
     try:
-        while True:
+        while duration < 0 or time.time() - start_time < duration:
             event_func, topic = random.choice(event_generators)
             event_data = event_func(data)
             if event_data:
                 producer.send(topic, value=event_data)
                 print(f'Data sent to {topic}: {event_data}')
-            time.sleep(random.uniform(0.5, 2.5))  # Simular picos de tráfico
+            time.sleep(random.uniform(duration/10, duration/4))  # Al menos 4 picos de tráfico
     except KeyboardInterrupt:
         pass
     finally:
         producer.close()
-
-# Llama a la función para comenzar a enviar los eventos
-send_interleaved_events()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--duration', type=int, default=5, help='Duration in seconds (default: 5)')
+    args = parser.parse_args()
+    # Llama a la función para comenzar a enviar los eventos
+    send_interleaved_events(args.duration)
