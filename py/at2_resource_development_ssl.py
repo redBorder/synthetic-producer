@@ -13,20 +13,6 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 # Inicializa Faker para datos sintéticos
 fake = Faker()
 
-address = [
-    "192.0.2.1",
-    "203.0.113.5",
-    "185.220.100.4",
-    "45.76.123.45",
-    "104.16.90.1",
-    "172.16.0.10",
-    "10.0.0.25",
-    "192.168.1.1",
-    "198.51.100.23",
-    "203.0.113.42"
-]
-address_malicious = ["80.66.76.130", "91.238.181.32", "185.170.144.3", "185.234.216.88"]
-
 # Definición de las firmas para el sig_id y sus revisiones (rev)
 sig_ids = [
     (49987, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure arbitrary file upload to tftpRoot attempt', 'low'),
@@ -57,7 +43,7 @@ def generate_event():
         "dst_port": http_port,
         "dst_port_name": str(http_port),
         "src_asnum": 4110056778,
-        "src": random.choice(address),
+        "src": random_malicious_ip(),
         "src_name": random_malicious_ip(),
         "dst_asnum": "3038642698",
         "dst_name": lan_asset[0],
