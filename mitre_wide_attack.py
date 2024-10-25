@@ -48,18 +48,19 @@ def check_and_kill_process(script, command):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--fast', action='store_true', default=False, help='Run in fast mode')
-    parser.add_argument('-h', '--helper', action='store_true', default=False, help='Show help message')
+    parser.add_argument('--help', action='store_true', default=False, help='Show help message')
     args = parser.parse_args()    
 
-    if args.helper:
+    if args.help:
         usage()
 
     while True:
         for script in SCRIPTS_PATH:
             print('Starting attack script')
             os.system(f'figlet "{os.path.basename(script)}"')   
-            if os.path.exists(script):
-                print ("ERROR: Script ${script} not found")
+            if not os.path.exists(script):
+                print(f"ERROR: Script {script} not found")
+                continue
             if script.endswith('.yml'):
                 command = f'rb_synthetic_producer -r 1 -p 1 -c {script}'
                 os.system(f'{command} &')
