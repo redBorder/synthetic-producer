@@ -4,6 +4,7 @@ from faker import Faker
 import json
 import time
 import random
+from assets import random_lan, lan_devices, random_malicious_ip, random_port, random_mac
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
@@ -40,6 +41,9 @@ def generate_ip():
 # Función para generar eventos sintéticos relacionados con redes
 def generate_event():
     sig_id_data = random.choice(sig_ids)
+    dst_port = random_port()
+    lan = lan_devices[6]#    ("192.168.3.10", "00:8b:9c:0d:1e:2f", "ASUSTek COMPUTER INC."),   #PCAlicia
+    lan_ip = lan[0]
     return {
         "timestamp": int(time.time()),
         "sensor_id_snort": 0,
@@ -48,14 +52,14 @@ def generate_event():
         "sig_id": sig_id_data[0],  # ID del evento
         "rev": sig_id_data[1],  # Revisión asociada al evento
         "priority": random.choice(priority_level),
-        "classification": "Misc activity",
+        "classification": "Malware",
         "msg": sig_id_data[2],  # Descripción del mensaje
-        "l4_proto_name": "udp",
-        "l4_proto": 17,
-        "ethsrc": "ec:ce:13:ae:32:a3",
-        "ethdst": "50:eb:f6:8e:cf:30",
-        "ethsrc_vendor": "Cisco Systems, Inc",
-        "ethdst_vendor": "ASUSTek COMPUTER INC.",
+        "l4_proto_name": "tdp",
+        "l4_proto": 6,
+        "ethsrc": fake.mac_address(),
+        "ethdst": lan[1],
+        "ethsrc_vendor": "Oracle Corporation",
+        "ethdst_vendor": lan[2],
         "ethtype": 33024,
         "vlan": 30,
         "vlan_name": "30",
@@ -64,16 +68,16 @@ def generate_event():
         "udplength": 72,
         "ethlength": 0,
         "ethlength_range": "0(0-64]",
-        "src_port": 3478,
-        "src_port_name": "3478",
-        "dst_port": 55759,
-        "dst_port_name": "55759",
+        "src_port": dst_port,
+        "src_port_name": str(dst_port),
+        "dst_port": 443,
+        "dst_port_name": "443",
         "src_asnum": 4110056778,
-        "src": random.choice(address),
-        "src_name": "74.125.250.244",
+        "src": "31.216.145.5",
+        "src_name": "31.216.145.5",
         "dst_asnum": "3038642698",
-        "dst_name": "10.2.30.181",
-        "dst": "10.2.30.181",
+        "dst_name": lan_ip,
+        "dst": lan_ip,
         "ttl": 47,
         "tos": 0,
         "id": 0,
