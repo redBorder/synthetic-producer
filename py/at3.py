@@ -4,6 +4,7 @@ from faker import Faker
 import json
 import time
 import random
+from assets import random_lan, lan_devices, random_malicious_ip, random_port, random_mac, user_devices, random_vendor
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
@@ -30,16 +31,16 @@ address_malicious = ["80.66.76.130", "91.238.181.32", "185.170.144.3", "185.234.
 
 # Definición de las firmas para el sig_id y sus revisiones (rev)
 sig_ids = [
-    (2018853, 1, 'ET WEB_CLIENT Possible Phishing E-ZPass Email Toll Notification July 30 2014'),
-    (2022136, 1, 'ET WEB_CLIENT Netsolhost SSL Proxying - Possible Phishing Nov 24 2015'),
-    (2022374, 1, 'ET WEB_CLIENT Suspicious LastPass URI Structure - Possible Phishing'),
-    (2022486, 1, 'ET CURRENT_EVENTS Possible Phishing Landing via GetGoPhish Phishing Tool'),
-    (2022578, 1, 'ET WEB_CLIENT JS Obfuscation - Possible Phishing 2016-03-01'),
-    (2022597, 1, 'ET CURRENT_EVENTS Possible Phishing Landing - Data URI Inline Javascript Mar 07 2016'),
-    (2022905, 1, 'ET CURRENT_EVENTS Suspicious Hidden Javascript Redirect - Possible Phishing Jun 17'),
-    (2022974, 1, 'ET CURRENT_EVENTS Suspicious SMTP Settings in XLS - Possible Phishing Document'),
-    (2023139, 1, 'ET INFO Form Data Submitted to yolasite.com - Possible Phishing'),
-    (2023638, 1, 'ET WEB_CLIENT Possible Phishing Redirect Dec 13 2016')
+    (2018853, 1, 'ET WEB_CLIENT Possible Phishing E-ZPass Email Toll Notification July 30 2014', 'low'),
+    # (2022136, 1, 'ET WEB_CLIENT Netsolhost SSL Proxying - Possible Phishing Nov 24 2015', 'low'),
+    (2022374, 1, 'ET WEB_CLIENT Suspicious LastPass URI Structure - Possible Phishing', 'high'),
+    (2022486, 1, 'ET CURRENT_EVENTS Possible Phishing Landing via GetGoPhish Phishing Tool', 'high'),
+    (2022578, 1, 'ET WEB_CLIENT JS Obfuscation - Possible Phishing 2016-03-01', 'medium'),
+    (2022597, 1, 'ET CURRENT_EVENTS Possible Phishing Landing - Data URI Inline Javascript Mar 07 2016', 'high'),
+    (2022905, 1, 'ET CURRENT_EVENTS Suspicious Hidden Javascript Redirect - Possible Phishing Jun 17', 'high'),
+    # (2022974, 1, 'ET CURRENT_EVENTS Suspicious SMTP Settings in XLS - Possible Phishing Document', 'low'),
+    # (2023139, 1, 'ET INFO Form Data Submitted to yolasite.com - Possible Phishing', 'low'),
+    (2023638, 1, 'ET WEB_CLIENT Possible Phishing Redirect Dec 13 2016', 'high')
 ]
 
 # Función para generar direcciones IP realistas
@@ -49,6 +50,10 @@ def generate_ip():
 # Función para generar eventos sintéticos relacionados con redes
 def generate_event():
     sig_id_data = random.choice(sig_ids)
+    user_asset = random.choice(user_devices)
+    dst_port = random.choice([80, 443, 53, 25, 587, 465, 143, 993, 110, 995])
+    src = random.choice(random_malicious_ip)
+    dst = user_asset[0]
     return {
         "timestamp": int(time.time()),
         "sensor_id_snort": 0,
@@ -57,14 +62,14 @@ def generate_event():
         "sig_id": sig_id_data[0],  # ID del evento
         "rev": sig_id_data[1],  # Revisión asociada al evento
         "priority": random.choice(priority_level),
-        "classification": "Misc activity",
+        "classification": "Phising",
         "msg": sig_id_data[2],  # Descripción del mensaje
         "l4_proto_name": "udp",
         "l4_proto": 17,
-        "ethsrc": "ec:ce:13:ae:32:a3",
-        "ethdst": "50:eb:f6:8e:cf:30",
-        "ethsrc_vendor": "Cisco Systems, Inc",
-        "ethdst_vendor": "ASUSTek COMPUTER INC.",
+        "ethsrc": fake.mac_address(),
+        "ethdst": user_asset[1],
+        "ethsrc_vendor": random_vendor(),
+        "ethdst_vendor": user_asset[3],
         "ethtype": 33024,
         "vlan": 30,
         "vlan_name": "30",
@@ -75,14 +80,14 @@ def generate_event():
         "ethlength_range": "0(0-64]",
         "src_port": 3478,
         "src_port_name": "3478",
-        "dst_port": 55759,
-        "dst_port_name": "55759",
+        "dst_port": dst_port,
+        "dst_port_name": str(dst_port),
         "src_asnum": 4110056778,
-        "src": random.choice(address),
-        "src_name": "74.125.250.244",
+        "src": src,
+        "src_name": src,
         "dst_asnum": "3038642698",
-        "dst_name": "10.2.30.181",
-        "dst": "10.2.30.181",
+        "dst_name": dst,
+        "dst": dst,
         "ttl": 47,
         "tos": 0,
         "id": 0,

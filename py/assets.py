@@ -12,6 +12,11 @@ lan_devices = [
     ("192.168.3.13", "00:1e:3a:4b:ff:1a", "Dell Inc.")                #BasePrinter
 ]
 
+user_devices = [
+    ("192.168.3.10", "00:1a:2b:3c:4d:5e", "ASUSTek COMPUTER INC.", "PCAlice"),
+    ("192.168.3.11", "00:2b:3c:4d:5e:6f", "ASUSTek COMPUTER INC.", "PCBob"),
+    ("192.168.3.12", "00:3c:4d:5e:6f:7a", "ASUSTek COMPUTER INC.", "PCCarlos"),
+    ("192.168.3.13", "00:4d:5e:6f:7a:8b", "Dell Inc.", "BasePrinter")]
 def random_lan():
   return random.choice(lan_devices)
 

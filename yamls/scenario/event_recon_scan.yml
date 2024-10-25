@@ -1,0 +1,290 @@
+topic: rb_event
+fields:
+  timestamp:
+    type: timestamp
+  sensor_id_snort:
+    type: constant
+    value: 0
+  action:
+    type: constant
+    value: 'alert'
+  sig_generator:
+    type: constant
+    value: 1
+  sig_id:
+    type: constant
+    value: 2001583
+  rev:
+    type: constant
+    value: 3
+  priority:
+    type: constant
+    value: 'low'
+  classification:
+    type: constant
+    value: 'Misc activity'
+  msg:
+    type: constant
+    value: 'ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection'
+  l4_proto_name:
+    type: constant
+    value: 'udp'
+  l4_proto:
+    type: constant
+    value: 17
+  ethsrc:
+    type: function
+    value: random_mac()
+  ethdst:
+    type: function
+    value: random_mac()
+  ethsrc_vendor:
+    type: collection
+    values:
+      - 'Cisco Systems, Inc'
+      - 'Dell Inc.'
+      - 'HP Inc.'
+      - 'Intel Corporation'
+      - 'Apple Inc.'
+      - 'Samsung Electronics'
+      - 'Juniper Networks'
+      - 'IBM Corp.'
+      - 'Sony Corporation'
+      - 'LG Electronics'
+      - 'Huawei Technologies'
+      - 'ASUS'
+      - 'Lenovo'
+      - 'D-Link Corporation'
+      - 'NetGear'
+      - 'TP-Link Technologies'
+  ethdst_vendor:
+    type: constant
+    value: 'ASUSTek COMPUTER INC.'
+  ethtype:
+    type: constant
+    value: 33024
+  vlan:
+    type: constant
+    value: 30
+  vlan_name:
+    type: constant
+    value: '30'
+  vlan_priority:
+    type: constant
+    value: 0
+  vlan_drop:
+    type: constant
+    value: 0
+  udplength:
+    type: constant
+    value: 72
+  ethlength:
+    type: constant
+    value: 0
+  ethlength_range:
+    type: constant
+    value: '0(0-64]'
+  src_port:
+    type: integer
+    min: 10000
+    max: 60000
+  src_port_name:
+    type: reference
+    value: src_port
+  dst_port:
+    type: constant
+    value: 1433
+  dst_port_name:
+    type: constant
+    value: '1433'
+  src_asnum:
+    type: constant
+    value: 4110056778
+  src:
+    type: collection
+    values:
+      - '74.125.250.244'
+      - '74.125.250.245'
+      - '74.125.250.246'
+      - '74.125.250.247'
+      - '74.125.250.248'
+      - '90.167.13.113'
+      - '35.230.139.19'
+      - '92.249.48.244'
+  src_name:
+    type: reference
+    value: src
+  dst_asnum:
+    type: constant
+    value: '3038642698'
+  dst:
+    type: collection
+    values:
+      - '192.168.0.1'
+      - '192.168.0.10'
+      - '192.168.0.20'
+      - '192.168.0.30'
+      - '192.168.0.100'
+      - '192.168.0.110'
+      - '192.168.3.10'
+      - '192.168.3.11'
+      - '192.168.3.12'
+  dst_name:
+    type: reference
+    value: dst
+  ttl:
+    type: constant
+    value: 47
+  tos:
+    type: constant
+    value: 0
+  id:
+    type: constant
+    value: 0
+  iplen:
+    type: constant
+    value: 92
+  iplen_range:
+    type: constant
+    value: '[64-128)'
+  dgmlen:
+    type: constant
+    value: 92
+  group_uuid:
+    type: constant
+    value: 'f1b4eeb4-12e1-464c-821f-2439564ec585'
+  group_name:
+    type: constant
+    value: 'outside'
+  sensor_type:
+    type: constant
+    value: 'ips'
+  domain_name:
+    type: constant
+    value: 'N/A'
+  sensor_ip:
+    type: constant
+    value: '10.0.250.195'
+  index_partitions:
+    type: constant
+    value: 5
+  index_replicas:
+    type: constant
+    value: 1
+  sensor_uuid:
+    type: constant
+    value: 'df699ecd-fc05-41fd-a0a3-87ecd7da2245'
+  sensor_name:
+    type: constant
+    value: 'rbips-62ac2c7d'
+  namespace:
+    type: constant
+    value: 'Namespace Level Alfa'
+  namespace_uuid:
+    type: constant
+    value: '352369f8-60fb-4b72-a603-d1d8393cca0a'
+  organization:
+    type: constant
+    value: 'TechSecure'
+  organization_uuid:
+    type: constant
+    value: '4b839195-3d3a-4983-abc0-9731ea731cab'
+  service_provider:
+    type: constant
+    value: 'TechSecure Corp'
+  service_provider_uuid:
+    type: constant
+    value: 'c2238202-ce42-4235-814f-91d2e6e0122a'
+  campus:
+    type: constant
+    value: 'N/A'
+  campus_uuid:
+    type: constant
+    value: 'N/A'
+  building:
+    type: constant
+    value: 'Main building'
+  building_uuid:
+    type: constant
+    value: '8e004910-c5e7-4ca0-b9df-156b1f6ad0a6'
+    
+
+  lan_ip:
+    type: function
+    function: |
+      return random.choice(["192.168.0.1", "192.168.0.10", "192.168.0.20", "192.168.0.30", "192.168.0.100", "192.168.0.110", "192.168.3.10", "192.168.3.11", "192.168.3.12"])
+
+  eth:
+    type: function
+    function: |
+      return random.choice(["00:1a:2b:3c:4d:5e", "00:2b:3c:4d:5e:6f", "00:3c:4d:5e:6f:7a", "00:4d:5e:6f:7a:8b", "00:5e:6f:7a:8b:9c", "00:6f:7a:8b:9c:0d", "00:7a:8b:9c:0d:1e", "00:8b:9c:0d:1e:2f", "00:9c:0d:1e:2f:3a", "00:0d:1e:2f:3a:4b"])      
+    random_mac:
+      
+    type: function
+    function: |
+      return f"{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}:{random.randint(0, 255):02x}"
+
+    port_src = random.choice(list(range(10000,60000)))
+    malicious_ips= random.choice(["74.125.250.244", "74.125.250.245", "74.125.250.246", "74.125.250.247", "74.125.250.248", "90.167.13.113", "35.230.139.19", "92.249.48.244"])
+    
+    return {
+        "timestamp": int(time.time()),
+        "sensor_id_snort": 0,
+        "action": "alert",
+        "sig_generator": 1,
+        "sig_id": 2001583,
+        "rev": 3,
+        "priority": "low",
+        "classification": "Misc activity",
+        "msg": "ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection",
+        "l4_proto_name": "udp",
+        "l4_proto": 17,
+        "ethsrc": random_mac(),
+        "ethdst": random_mac(),
+        "ethsrc_vendor": random.choice(["Cisco Systems, Inc", "Dell Inc.", "HP Inc.", "Intel Corporation", "Apple Inc.", "Samsung Electronics", "Juniper Networks", "IBM Corp.", "Sony Corporation", "LG Electronics", "Huawei Technologies", "ASUS", "Lenovo", "D-Link Corporation", "NetGear", "TP-Link Technologies"]),
+        "ethdst_vendor": "ASUSTek COMPUTER INC.", # maybe change between cisco and asus
+        "ethtype": 33024,
+        "vlan": 30,
+        "vlan_name": "30",
+        "vlan_priority": 0,
+        "vlan_drop": 0,
+        "udplength": 72,
+        "ethlength": 0,
+        "ethlength_range": "0(0-64]",
+        "src_port": port_src,
+        "src_port_name": port_src,
+        "dst_port": 1433,
+        "dst_port_name": "1433",
+        "src_asnum": 4110056778,
+        "src": malicious_ips,
+        "src_name": malicious_ips,
+        "dst_asnum": "3038642698",
+        "dst_name": lan_ip,
+        "dst": lan_ip,
+        "ttl": 47,
+        "tos": 0,
+        "id": 0,
+        "iplen": 92,
+        "iplen_range": "[64-128)",
+        "dgmlen": 92,
+        "group_uuid": "f1b4eeb4-12e1-464c-821f-2439564ec585",
+        "group_name": "outside",
+        "sensor_type": "ips",
+        "domain_name": "N/A",
+        "sensor_ip": "10.0.250.195",
+        "index_partitions": 5,
+        "index_replicas": 1,
+        "sensor_uuid": "df699ecd-fc05-41fd-a0a3-87ecd7da2245",
+        "sensor_name": "rbips-62ac2c7d",
+        "namespace": "Namespace Level Alfa",
+        "namespace_uuid": "352369f8-60fb-4b72-a603-d1d8393cca0a",
+        "organization": "TechSecure",
+        "organization_uuid": "4b839195-3d3a-4983-abc0-9731ea731cab",
+        "service_provider": "TechSecure Corp",
+        "service_provider_uuid": "c2238202-ce42-4235-814f-91d2e6e0122a",
+        "campus": "N/A",
+        "campus_uuid": "N/A",
+        "building": "Main building",
+        "building_uuid": "8e004910-c5e7-4ca0-b9df-156b1f6ad0a6"
+    }
+
