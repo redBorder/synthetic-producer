@@ -32,3 +32,4 @@ SCREEN_NAME=${SCREEN_NAME:-mitre_wide_attack}
 echo "Restarting mitre_wide_attack.py"
 screen -X -S ${SCREEN_NAME} quit 2>/dev/null || true
 screen -dmS ${SCREEN_NAME} python3 mitre_wide_attack.py ${FAST_MODE:+--fast}
+echo "Screen instance ${SCREEN_NAME} created. Watch it running screen -r ${SCREEN_NAME}"
