@@ -23,3 +23,24 @@ def random_port():
 
 def random_malicious_ip():
   random.choice(["74.125.250.244", "74.125.250.245", "74.125.250.246", "74.125.250.247", "74.125.250.248", "90.167.13.113", "35.230.139.19", "92.249.48.244"])
+
+def random_vendor():
+   return random.choice([
+       "Cisco Systems, Inc",
+       "Dell Inc.",
+       "HP Inc.",
+       "ASUSTek COMPUTER INC.",
+       "TP-Link Corp.",
+       "Netgear Inc.",
+       "D-Link Corp.",
+       "Intel Corporation",
+       "Apple Inc.",
+       "Lenovo Group Ltd.",
+       "Samsung Electronics Co.",
+       "Microsoft Corporation",
+       "Huawei Technologies Co.",
+       "Sony Corporation",
+       "LG Electronics Inc.",
+       "Acer Inc."
+   ])
+   

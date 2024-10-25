@@ -4,6 +4,7 @@ from faker import Faker
 import json
 import time
 import random
+from assets import lan_devices, random_vendor, random_malicious_ip, random_port
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
@@ -12,8 +13,6 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 # Inicializa Faker para datos sintéticos
 fake = Faker()
 
-# Campos a modificar
-priority_level = ['high', 'medium', 'low']
 address = [
     "192.0.2.1",
     "203.0.113.5",
@@ -30,16 +29,16 @@ address_malicious = ["80.66.76.130", "91.238.181.32", "185.170.144.3", "185.234.
 
 # Definición de las firmas para el sig_id y sus revisiones (rev)
 sig_ids = [
-    (49987, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure arbitrary file upload to tftpRoot attempt'),
-    (52129, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure directory traversal attempt'),
-    (57581, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure EPNM command injection attempt'),
-    (57582, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure EPNM command injection attempt'),
-    (57583, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure EPNM command injection attempt'),
-    (58169, 1, 'SERVER-WEBAPP Microsoft Windows Open Management Infrastructure remote code execution attempt'),
-    (59750, 3, 'SERVER-WEBAPP Cisco Enterprise NFV Infrastructure command injection attempt'),
-    (59751, 3, 'SERVER-WEBAPP Cisco Enterprise NFV Infrastructure command injection attempt'),
-    (2033690, 1, 'ET TROJAN Cobalt Strike Infrastructure CnC Domain in DNS Lookup'),
-    (2033691, 1, 'ET TROJAN Cobalt Strike Infrastructure CnC Domain in DNS Lookup')
+    (49987, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure arbitrary file upload to tftpRoot attempt', 'low'),
+    (52129, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure directory traversal attempt', 'low'),
+    (57581, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure EPNM command injection attempt', 'medium'),
+    (57582, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure EPNM command injection attempt', 'medium'),
+    (57583, 3, 'SERVER-WEBAPP Cisco Prime Infrastructure EPNM command injection attempt', 'medium'),
+    (58169, 1, 'SERVER-WEBAPP Microsoft Windows Open Management Infrastructure remote code execution attempt', 'high'),
+    (59750, 3, 'SERVER-WEBAPP Cisco Enterprise NFV Infrastructure command injection attempt', 'medium'),
+    (59751, 3, 'SERVER-WEBAPP Cisco Enterprise NFV Infrastructure command injection attempt', 'medium'),
+    (2033690, 1, 'ET TROJAN Cobalt Strike Infrastructure CnC Domain in DNS Lookup', 'high'),
+    (2033691, 1, 'ET TROJAN Cobalt Strike Infrastructure CnC Domain in DNS Lookup', 'high')
 ]
 
 # Función para generar direcciones IP realistas
@@ -49,22 +48,34 @@ def generate_ip():
 # Función para generar eventos sintéticos relacionados con redes
 def generate_event():
     sig_id_data = random.choice(sig_ids)
+    lan_asset = lan_devices[5] # web server
+    http_port = random.choice([80, 443])
     return {
         "timestamp": int(time.time()),
+        "src_port": random_port(),
+        "src_port_name": str(random_port()),
+        "dst_port": http_port,
+        "dst_port_name": str(http_port),
+        "src_asnum": 4110056778,
+        "src": random.choice(address),
+        "src_name": random_malicious_ip(),
+        "dst_asnum": "3038642698",
+        "dst_name": lan_asset[0],
+        "dst": lan_asset[0],
+        "ethsrc": fake.mac_address(),
+        "ethdst": lan_asset[1],
+        "ethsrc_vendor": random,
+        "ethdst_vendor": lan_asset[2],
         "sensor_id_snort": 0,
         "action": "alert",
         "sig_generator": 1,
         "sig_id": sig_id_data[0],  # ID del evento
         "rev": sig_id_data[1],  # Revisión asociada al evento
-        "priority": random.choice(priority_level),
-        "classification": "Misc activity",
+        "priority": sig_id_data[3],
+        "classification": "Command and Control",
         "msg": sig_id_data[2],  # Descripción del mensaje
         "l4_proto_name": "udp",
         "l4_proto": 17,
-        "ethsrc": "ec:ce:13:ae:32:a3",
-        "ethdst": "50:eb:f6:8e:cf:30",
-        "ethsrc_vendor": "Cisco Systems, Inc",
-        "ethdst_vendor": "ASUSTek COMPUTER INC.",
         "ethtype": 33024,
         "vlan": 30,
         "vlan_name": "30",
@@ -73,16 +84,6 @@ def generate_event():
         "udplength": 72,
         "ethlength": 0,
         "ethlength_range": "0(0-64]",
-        "src_port": 3478,
-        "src_port_name": "3478",
-        "dst_port": 55759,
-        "dst_port_name": "55759",
-        "src_asnum": 4110056778,
-        "src": random.choice(address),
-        "src_name": "74.125.250.244",
-        "dst_asnum": "3038642698",
-        "dst_name": "10.2.30.181",
-        "dst": "10.2.30.181",
         "ttl": 47,
         "tos": 0,
         "id": 0,
