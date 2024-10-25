@@ -12,6 +12,7 @@ while getopts "hfs:" opt; do
       echo "Usage: $0 [-s screen_name] [-f]"
       echo "Starts the mitre_wide_attack.py script in a screen session"
       echo "-f: enable fast attack mode"
+      python3 mitre_wide_attack.py -h
       exit 0
       ;;
     f)
