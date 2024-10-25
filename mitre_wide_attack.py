@@ -25,7 +25,8 @@ SCRIPTS_PATH = [
 '/root/vimesa/scripts/attacks/at10_collection_screen.py',
 '/root/vimesa/scripts/attacks/at11_exfiltration_dropbox.py',
 '/root/vimesa/scripts/attacks/at12_cnc.py',
-'/root/vimesa/scripts/attacks/at13_impact_ransom.py']
+'/root/vimesa/scripts/attacks/at13_impact_ransom.py'
+]
 
 import os
 import time
@@ -48,7 +49,7 @@ def check_and_kill_process(script, command):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--fast', action='store_true', default=False, help='Run in fast mode')
-    parser.add_argument('--help', action='store_true', default=False, help='Show help message')
+    parser.add_argument('-h', '--help', action='store_true', default=False, help='Show help message')
     args = parser.parse_args()    
 
     if args.help:
