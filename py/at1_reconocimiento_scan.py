@@ -3,7 +3,7 @@ from kafka import KafkaProducer
 import json
 import time
 import random
-from assets import lan_devices, random_malicious_ip, random_port, random_mac
+from assets import random_lan, lan_devices, random_malicious_ip, random_port, random_mac
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
@@ -11,25 +11,26 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 
 # Active Scanning T1595
 def generate_active_scanning_event():
-    lan_ip, lan_mac = random.choice(list(lan_devices.items()))   
     port_src = random_port()
     wan_ip = random_malicious_ip()
+    asset_dst = random_lan()
+
     return {
+        "sig_id": 2001583,
+        "msg": "ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection",
+        "priority": "low",
         "timestamp": int(time.time()),
         "sensor_id_snort": 0,
         "action": "alert",
         "sig_generator": 1,
-        "sig_id": 2001583,
         "rev": 3,
-        "priority": "low",
         "classification": "Misc activity",
-        "msg": "ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection",
         "l4_proto_name": "udp",
         "l4_proto": 17,
         "ethsrc": random_mac(),
-        "ethdst": lan_mac,
+        "ethdst": asset_dst[1],
         "ethsrc_vendor": random.choice(["Cisco Systems, Inc", "Dell Inc.", "HP Inc.", "Intel Corporation", "Apple Inc.", "Samsung Electronics", "Juniper Networks", "IBM Corp.", "Sony Corporation", "LG Electronics", "Huawei Technologies", "ASUS", "Lenovo", "D-Link Corporation", "NetGear", "TP-Link Technologies"]),
-        "ethdst_vendor": "ASUSTek COMPUTER INC.", # maybe change between cisco and asus
+        "ethdst_vendor": asset_dst[2], # maybe change between cisco and asus
         "ethtype": 33024,
         "vlan": 30,
         "vlan_name": "30",
@@ -46,8 +47,8 @@ def generate_active_scanning_event():
         "src": wan_ip,
         "src_name": wan_ip,
         "dst_asnum": "3038642698",
-        "dst_name": lan_ip,
-        "dst": lan_ip,
+        "dst_name": asset_dst[0],
+        "dst": asset_dst[0],
         "ttl": 47,
         "tos": 0,
         "id": 0,
