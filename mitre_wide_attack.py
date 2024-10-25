@@ -2,6 +2,7 @@
 
 # This script is used to run different incidentes that are following a full path of Mitre tactics, by running the corresponding scripts.
 # Each of the scripts is responsible for running the incident that triggers the corresponding tactic.
+# The orden is left to right, corresponding on the column order of the orginal mitre matrix
 # On start, this script will create an instace in screen named "mitre_wide_attack" and will repeat itself every 2 hours.
 
 # Array of scripts to execute in sequence
@@ -25,6 +26,8 @@ SCRIPTS_PATH = [
 import os
 import time
 from datetime import datetime, timedelta
+import argparse
+
 TEST_TIME=10
 TIME_TO_NEXT_ATTACK=600
 def check_and_kill_process(script, command):
@@ -37,12 +40,17 @@ def check_and_kill_process(script, command):
         os.system(f'pkill -f "{command}"')
         time.sleep(5)
         check_process = os.popen(f'pgrep -f "{command}"').read()
-
-while True:
-    for script in SCRIPTS_PATH:
-        print('Starting attack script')
-        os.system(f'figlet "{os.path.basename(script)}"')   
-        if os.path.exists(script):
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--fast', action='store_true', default=False, help='Run in fast mode')
+    args = parser.parse_args()
+    
+    while True:
+        for script in SCRIPTS_PATH:
+            print('Starting attack script')
+            os.system(f'figlet "{os.path.basename(script)}"')   
+            if os.path.exists(script):
+                print ("ERROR: Script ${script} not found")
             if script.endswith('.yml'):
                 command = f'rb_synthetic_producer -r 1 -p 1 -c {script}'
                 os.system(f'{command} &')
@@ -53,9 +61,7 @@ while True:
                 os.system(command)
                 time.sleep(5)
                 check_and_kill_process(script, command)
-        time.sleep(TEST_TIME)
-        # time.sleep(TIME_TO_NEXT_ATTACK)
-    
-    next_run = datetime.now() + timedelta(hours=2)
-    os.system(f'figlet "Repeating scenario at {next_run.strftime("%H:%M")} UTC"')
-    time.sleep(7200) # Back in 2 hours
+        time.sleep(TEST_TIME if args.fast else TIME_TO_NEXT_ATTACK)        
+        next_run_str = datetime.now() + timedelta(hours=2)
+        os.system(f'figlet "Repeating scenario at {next_run_str.strftime("%H:%M")} UTC"')
+        time.sleep(7200) # Back in 2 hours

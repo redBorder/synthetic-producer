@@ -6,12 +6,16 @@
 # To view the running screen session:
 # - To watch and attach to screen: screen -r mitre_wide_attack
 # - Detach from screen: Ctrl+A then D
-while getopts "hs:" opt; do
+while getopts "hfs:" opt; do
   case $opt in
     h)
-      echo "Usage: $0 [-s screen_name]"
+      echo "Usage: $0 [-s screen_name] [-f]"
       echo "Starts the mitre_wide_attack.py script in a screen session"
+      echo "-f: enable fast attack mode"
       exit 0
+      ;;
+    f)
+      FAST_MODE=true
       ;;
     s)
       SCREEN_NAME="$OPTARG"
@@ -22,9 +26,8 @@ while getopts "hs:" opt; do
       ;;
   esac
 done
-
 SCREEN_NAME=${SCREEN_NAME:-mitre_wide_attack}
 
 echo "Restarting mitre_wide_attack.py"
 screen -X -S ${SCREEN_NAME} quit 2>/dev/null || true
-screen -dmS ${SCREEN_NAME} python3 mitre_wide_attack.py
+screen -dmS ${SCREEN_NAME} python3 mitre_wide_attack.py ${FAST_MODE:+--fast}
