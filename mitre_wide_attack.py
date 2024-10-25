@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
-# This script is used to run different incidentes that are following a full path of Mitre tactics, by running the corresponding scripts.
-# Each of the scripts is responsible for running the incident that triggers the corresponding tactic.
-# The orden is left to right, corresponding on the column order of the orginal mitre matrix
-# On start, this script will create an instace in screen named "mitre_wide_attack" and will repeat itself every 2 hours.
+def usage():
+    '''
+    This script is used to run different incidentes that are following a full path of Mitre tactics, by running the corresponding scripts.
+    Each of the scripts is responsible for running the incident that triggers the corresponding tactic.
+    The orden is left to right, corresponding on the column order of the orginal mitre matrix
+    On start, this script will create an instace in screen named "mitre_wide_attack" and will repeat itself every 2 hours.
+    '''
+    exit()
 
 # Array of scripts to execute in sequence
 SCRIPTS_PATH = [
@@ -40,11 +44,16 @@ def check_and_kill_process(script, command):
         os.system(f'pkill -f "{command}"')
         time.sleep(5)
         check_process = os.popen(f'pgrep -f "{command}"').read()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--fast', action='store_true', default=False, help='Run in fast mode')
-    args = parser.parse_args()
-    
+    parser.add_argument('-h', '--helper', action='store_true', default=False, help='Show help message')
+    args = parser.parse_args()    
+
+    if args.helper:
+        usage()
+
     while True:
         for script in SCRIPTS_PATH:
             print('Starting attack script')
