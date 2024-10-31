@@ -18,7 +18,6 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 
 # Función para generar eventos sintéticos relacionados con redes
 def generate_event():
-    sig_id_data = random.choice(sig_ids)
     lan_device = random.choice(assets.lan_devices_2)
     wan_device = random.choice(wan_devices)
     in_out = [lan_device, wan_device]
@@ -79,7 +78,7 @@ def run_producer(duration):
             data = generate_event()
             producer.send('rb_flow', value=data)  # Envía los eventos al topic de Kafka
             print(f'Data sent: {data}')
-            time.sleep(random.uniform(0.00001, 0.001)*duration)  # Random interval between events    except KeyboardInterrupt:
+            time.sleep(random.uniform(0.00001, 0.001))  # Random interval between events    except KeyboardInterrupt:
         pass
     finally:
         producer.close()
