@@ -57,8 +57,8 @@ def generate_event():
         "building": "Main building",
         "building_uuid": "8e004910-c5e7-4ca0-b9df-156b1f6ad0a6",
         "direction": direction, 
-        "lan_ip": src_device.ip, 
-        "wan_ip": dst_device.ip,
+        "lan_ip": lan_device.ip, 
+        "wan_ip": wan_device.ip,
         "public_ip": wan_device.ip, 
         "client_mac": sensor.mac,
         "lan_l4_port": assets.random_port(),
@@ -78,7 +78,7 @@ def run_producer(duration):
             data = generate_event()
             producer.send('rb_flow', value=data)  # Envía los eventos al topic de Kafka
             print(f'Data sent: {data}')
-            time.sleep(random.uniform(0.0001, 1))  # Random interval between events    except KeyboardInterrupt:
+            time.sleep(random.uniform(0.000001, 0.01))  # Random interval between events    except KeyboardInterrupt:
         pass
     finally:
         producer.close()
