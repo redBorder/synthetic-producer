@@ -48,8 +48,16 @@ mirror_devices = [
 ]
 
 web_devices = [
-   Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
-   Device(ip="192.168.0.110", mac="00:6f:7a:8b:9c:0d", vendor="ASUSTek COMPUTER INC.", name="Storeage Server")
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+  Device(ip="192.168.0.110", mac="00:6f:7a:8b:9c:0d", vendor="ASUSTek COMPUTER INC.", name="Storeage Server")
 ]
 
 network_devices = mirror_devices + web_devices
