@@ -1,5 +1,5 @@
 import random
-from device import Device, Sensor
+from device import Device
 
 MALICIOUS_IPS = ["74.125.250.244", "74.125.250.245", "74.125.250.246", "74.125.250.247", "74.125.250.248", "90.167.13.113", "35.230.139.19", "92.249.48.244"]
 wan_devices = [
