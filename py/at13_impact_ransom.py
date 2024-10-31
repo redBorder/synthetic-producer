@@ -17,7 +17,7 @@ address = [
     "162.125.248.18"
 ]
 
-lan = [ "192.168.0.12" ]
+lan = [ "192.168.3.12" ]
 address_malicious = ["88.198.16.134", '46.17.97.37']
 
 # Definición de las firmas para el sig_id y sus revisiones (rev)
