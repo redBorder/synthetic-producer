@@ -26,7 +26,7 @@ def generate_event():
     src_device = in_out[0]
     dst_device = in_out[1]
     sensor = random.choice(assets.mirror_devices)
-    direction = 'upstream' if src == lan_device else 'downstream'
+    direction = 'upstream' if src_device == lan_device else 'downstream'
     pkt = random.randint(10,1000)
     bytes = pkt*100
     return {
