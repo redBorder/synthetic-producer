@@ -20,19 +20,6 @@ wan_devices = [
     Device(ip="157.240.3.35", vendor="Facebook, Inc.")  # Instagram
 ]
 wan_devices += [Device(ip=mal) for mal in MALICIOUS_IPS]
-lan_devices_2 = [
-    Device(ip="192.168.0.1", mac="00:1a:2b:3c:4d:5e", vendor="Cisco Systems, Inc", name="Main Router"),
-    Device(ip="192.168.0.10", mac="00:2b:3c:4d:5e:6f", vendor="Cisco Systems, Inc", name="Base Router"),
-    Device(ip="192.168.0.20", mac="00:3c:4d:5e:6f:7a", vendor="Cisco Systems, Inc", name="Labs Router"),
-    Device(ip="192.168.0.30", mac="00:4d:5e:6f:7a:8b", vendor="TP-Link Corp.", name="Recreational Router"),
-    Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
-    Device(ip="192.168.0.110", mac="00:6f:7a:8b:9c:0d", vendor="ASUSTek COMPUTER INC.", name="Storeage Server"),
-    Device(ip="192.168.3.10", mac="00:8b:9c:0d:1e:2f", vendor="ASUSTek COMPUTER INC.", name="PC Alicia"),
-    Device(ip="192.168.3.11", mac="00:9c:0d:1e:2f:3a", vendor="ASUSTek COMPUTER INC.", name="PC Bob"),
-    Device(ip="192.168.3.12", mac="00:0d:1e:2f:3a:4b", vendor="ASUSTek COMPUTER INC.", name="PC Carlos"),
-    Device(ip="192.168.3.13", mac="00:1e:3a:4b:ff:1a", vendor="Dell Inc.", name="Base Printer")
-]
-
 lan_devices = [ #On deprecation
     ("192.168.0.1", "00:1a:2b:3c:4d:5e", "Cisco Systems, Inc"),       #Main Router
     ("192.168.0.10", "00:2b:3c:4d:5e:6f", "Cisco Systems, Inc"),      #BaseRouter
@@ -47,32 +34,32 @@ lan_devices = [ #On deprecation
 ]
 
 user_devices_2 = [
-    Device(ip="192.168.3.10", mac="00:1a:2b:3c:4d:5e", vendor="ASUSTek COMPUTER INC.", name="PCAlice"),
-    Device(ip="192.168.3.11", mac="00:2b:3c:4d:5e:6f", vendor="ASUSTek COMPUTER INC.", name="PCBob"),
-    Device(ip="192.168.3.12", mac="00:3c:4d:5e:6f:7a", vendor="ASUSTek COMPUTER INC.", name="PCCarlos"),
-    Device(ip="192.168.3.13", mac="00:4d:5e:6f:7a:8b", vendor="Dell Inc.", name="BasePrinter")
+    Device(ip="192.168.3.10", mac="00:1a:2b:3c:4d:5e", vendor="ASUSTek COMPUTER INC.", name="PC Alice"),
+    Device(ip="192.168.3.11", mac="00:2b:3c:4d:5e:6f", vendor="ASUSTek COMPUTER INC.", name="PC Bob"),
+    Device(ip="192.168.3.12", mac="00:3c:4d:5e:6f:7a", vendor="ASUSTek COMPUTER INC.", name="PC Carlos"),
+    Device(ip="192.168.3.13", mac="00:4d:5e:6f:7a:8b", vendor="Dell Inc.", name="Base Printer")
 ]
 
 mirror_devices = [
-#    Device(ip="192.168.0.1", mac="00:1a:2b:3c:4d:5e", vendor="Cisco Systems, Inc", name="MainRouter"),
-   Device(ip="192.168.0.10", mac="00:2b:3c:4d:5e:6f", vendor="Cisco Systems, Inc", name="BaseRouter"),
-   Device(ip="192.168.0.20", mac="00:3c:4d:5e:6f:7a", vendor="Cisco Systems, Inc", name="LabsRouter"),
-   Device(ip="192.168.0.30", mac="00:4d:5e:6f:7a:8b", vendor="TP-Link Corp.", name="RecreationalRouter")
+#    Device(ip="192.168.0.1", mac="00:1a:2b:3c:4d:5e", vendor="Cisco Systems, Inc", name="Main Router"),
+   Device(ip="192.168.0.10", mac="00:2b:3c:4d:5e:6f", vendor="Cisco Systems, Inc", name="Base Router"),
+   Device(ip="192.168.0.20", mac="00:3c:4d:5e:6f:7a", vendor="Cisco Systems, Inc", name="Labs Router"),
+   Device(ip="192.168.0.30", mac="00:4d:5e:6f:7a:8b", vendor="TP-Link Corp.", name="Recreational Router")
 ]
 
 web_devices = [
-   Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="WebServer"),
-   Device(ip="192.168.0.110", mac="00:6f:7a:8b:9c:0d", vendor="ASUSTek COMPUTER INC.", name="StoreageServer")
+   Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
+   Device(ip="192.168.0.110", mac="00:6f:7a:8b:9c:0d", vendor="ASUSTek COMPUTER INC.", name="Storeage Server")
 ]
 
 network_devices = mirror_devices + web_devices
 lan_devices_2 = user_devices_2 + network_devices
 
 user_devices = [
-    ("192.168.3.10", "00:1a:2b:3c:4d:5e", "ASUSTek COMPUTER INC.", "PCAlice"),
-    ("192.168.3.11", "00:2b:3c:4d:5e:6f", "ASUSTek COMPUTER INC.", "PCBob"),
-    ("192.168.3.12", "00:3c:4d:5e:6f:7a", "ASUSTek COMPUTER INC.", "PCCarlos"),
-    ("192.168.3.13", "00:4d:5e:6f:7a:8b", "Dell Inc.", "BasePrinter")]
+    ("192.168.3.10", "00:1a:2b:3c:4d:5e", "ASUSTek COMPUTER INC.", "PC Alice"),
+    ("192.168.3.11", "00:2b:3c:4d:5e:6f", "ASUSTek COMPUTER INC.", "PC Bob"),
+    ("192.168.3.12", "00:3c:4d:5e:6f:7a", "ASUSTek COMPUTER INC.", "PC Carlos"),
+    ("192.168.3.13", "00:4d:5e:6f:7a:8b", "Dell Inc.", "Base Printer")]
 
 def random_lan():
   return random.choice(lan_devices)
