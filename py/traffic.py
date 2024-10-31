@@ -19,7 +19,7 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 # Función para generar eventos sintéticos relacionados con redes
 def generate_event():
     sig_id_data = random.choice(sig_ids)
-    lan_device = random.choice(lan_devices)
+    lan_device = random.choice(assets.lan_devices_2)
     wan_device = random.choice(wan_devices)
     in_out = [lan_device, wan_device]
     shuffle(in_out)
