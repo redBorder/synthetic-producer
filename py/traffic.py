@@ -23,8 +23,8 @@ def generate_event():
     wan_device = random.choice(wan_devices)
     in_out = [lan_device, wan_device]
     shuffle(in_out)
-    src = in_out[0]
-    dst = in_out[1]
+    src_device = in_out[0]
+    dst_device = in_out[1]
     sensor = random.choice(assets.mirror_devices)
     direction = 'upstream' if src == lan_device else 'downstream'
     pkt = random.randint(10,1000)
@@ -58,8 +58,8 @@ def generate_event():
         "building": "Main building",
         "building_uuid": "8e004910-c5e7-4ca0-b9df-156b1f6ad0a6",
         "direction": direction, 
-        "lan_ip": src, 
-        "wan_ip": dst,
+        "lan_ip": src_device.ip, 
+        "wan_ip": dst_device.ip,
         "public_ip": wan_device.ip, 
         "client_mac": sensor.mac,
         "lan_l4_port": assets.random_port(),
