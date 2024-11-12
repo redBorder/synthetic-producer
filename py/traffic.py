@@ -29,6 +29,7 @@ def generate_event():
     pkt = random.randint(10,1000)
     bytes = pkt*100
     return {
+        "type": "netflowv9",
         "ip_protocol_version": 4,
         "l4_proto": 17, 
         "l4_proto_name": "udp",
