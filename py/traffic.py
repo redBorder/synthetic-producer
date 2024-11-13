@@ -15,6 +15,7 @@ sig_ids = [1, 2, 3, 4, 5]  # Add appropriate signature IDs
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                         value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
+fake = Faker()
 
 # Función para generar eventos sintéticos relacionados con redes
 def generate_event():
@@ -28,8 +29,18 @@ def generate_event():
     direction = 'upstream' if src_device == lan_device else 'downstream'
     pkt = random.randint(10,1000)
     bytes = pkt*100
+    domain = '.'.join(wan_device.url.split('.')[-2:])
+    www = 'www.' + domain
     return {
-        "type": "netflowv9",
+        "http_url": www, #"https://www.example.com/path/to/resource?param=value",
+        "referer": www, #"https://www.example.com/path/to/resource?param=value",
+        "http_host": www, #"www.example.com",
+        "host": www, #"www.example.com",
+        "http_host_l2": domain, #"example.com",
+        "host_l2_domain": domain, #"example.com",
+        "referer_l2": domain, #"example.com",
+        "http_user_agent": fake.user_agent(),
+        "type": "netflowv10",
         "ip_protocol_version": 4,
         "l4_proto": 17, 
         "l4_proto_name": "udp",
