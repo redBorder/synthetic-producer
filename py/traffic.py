@@ -36,7 +36,7 @@ def generate_event():
         "input_vrf": 0, 
         "flow_end_reason": "idle timeout",
         # "biflow_direction": "initiator",
-        # "application_id_name": "13:443", 
+        "application_id_name": assets.random_application(), 
         "engine_id_name": "13",
         "output_vrf": 0, 
         "lan_interface": 1, 
