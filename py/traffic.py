@@ -60,6 +60,7 @@ def generate_event():
         "index_replicas": 1, 
         "sensor_ip": sensor.ip, 
         "sensor_name": sensor.name, 
+        "sensor_uuid": sensor.uuid,
         "namespace": "Namespace Level Alfa", 
         "namespace_uuid": "352369f8-60fb-4b72-a603-d1d8393cca0a",
         "organization": "TechSecure", 
