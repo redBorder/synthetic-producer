@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
 from kafka import KafkaProducer
-from faker import Faker
 import json
 import time
 import random
-from random import shuffle
-from assets import lan_devices, random_wan, wan_devices
 import assets
 
 # Configura el productor de Kafka
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                         value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-
-fake = Faker()
 
 # Función para generar eventos sintéticos relacionados con redes
 
@@ -32,7 +27,7 @@ def generate_event(monitor):
         "building_uuid": "8e004910-c5e7-4ca0-b9df-156b1f6ad0a6",
         "index_partitions":5,
         "index_replicas":1,
-        'monitor': monitor.type,
+        'monitor': monitor.monitor,
         'value': monitor.value,
         'type': monitor.type,
         'unit': monitor.unit,
