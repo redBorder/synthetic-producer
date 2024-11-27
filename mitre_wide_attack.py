@@ -50,6 +50,7 @@ def check_and_kill_process(script, command):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-f', '--fast', action='store_true', default=False, help='Run with no wait between incidents')
+    parser.add_argument('-l', '--looptime', default=3600, help='Time in seconds to start again the tactics happening')
 
     args = parser.parse_args()    
 
@@ -71,6 +72,6 @@ if __name__ == "__main__":
                 time.sleep(5)
                 check_and_kill_process(script, command)
         time.sleep(TEST_TIME if args.fast else TIME_TO_NEXT_ATTACK)        
-        next_run_str = datetime.now() + timedelta(hours=2)
+        next_run_str = datetime.now() + timedelta(hours=args.looptime/3600)
         os.system(f'figlet "Repeating scenario at {next_run_str.strftime("%H:%M")} UTC"')
-        time.sleep(7200) # Back in 2 hours
+        time.sleep(args.looptime)
