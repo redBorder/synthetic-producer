@@ -27,10 +27,30 @@ def generate_event():
     dst_device = in_out[1]
     sensor = random.choice(assets.mirror_devices)
     direction = 'upstream' if src_device == lan_device else 'downstream'
-    pkt = random.randint(10,1000)
-    bytes = pkt*100
     domain = '.'.join(wan_device.url.split('.')[-2:])
     www = 'www.' + domain
+    timestamp = int(time.time())
+    date = time.localtime(timestamp)
+    # Weights based on day of week (0=Monday, 6=Sunday)
+    day_weights = {
+        0: 1.0,  # Monday
+        1: 0.8,  # Tuesday
+        2: 1.0,  # Wednesday
+        3: 0.7,  # Thursday
+        4: 0.5,  # Friday
+        5: 0.1,  # Saturday
+        6: 0.1   # Sunday
+    }
+    # Weights based on hour (0-23)
+    hour_weights = {
+        0: 1.0, 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1,
+        6: 0.1, 7: 0.5, 8: 0.6, 9: 1.0, 10: 1.0, 11: 1.0,
+        12: 0.8, 13: 0.5, 14: 1.0, 15: 0.9, 16: 0.5, 17: 0.3,
+        18: 0.1, 19: 0.1, 20: 0.1, 21: 0.1, 22: 0.1, 23: 0.1
+    }
+    weight = day_weights[date.tm_wday] * hour_weights[date.tm_hour]    
+    pkt = random.randint(10,1000) *weight
+    bytes = pkt*100
     return {
         "http_url": www, #"https://www.example.com/path/to/resource?param=value",
         "referer": www, #"https://www.example.com/path/to/resource?param=value",
@@ -78,7 +98,7 @@ def generate_event():
         "wan_l4_port": assets.random_port(),
         "bytes": bytes,
         "pkts": pkt,        
-        "timestamp": int(time.time())
+        "timestamp": timestamp
     }
 
 # Produce mensajes continuamente
