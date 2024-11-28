@@ -45,10 +45,7 @@ exit 0
 %defattr(755,root,root)
 /usr/share/%{name}
 %defattr(644,root,root)
-/usr/share/%{name}/%{name}.jar
-/etc/%{name}/config/rb_flow.yml
-/etc/%{name}/config/rb_state.yml
-/etc/%{name}/config/rb_event.yml
+/etc/%{name}/config/*.yml
 
 %changelog
 * Mon Jul 15 2024 Luis Blanco <ljblanco@redborder.com> - 1.5.0-1
