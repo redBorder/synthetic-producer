@@ -1,0 +1,4 @@
+
+kafka-python==2.0.2
+Faker==18.13.0
+python-json-logger==2.0.7
