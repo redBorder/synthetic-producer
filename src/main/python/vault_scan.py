@@ -151,7 +151,7 @@ def generate_vault(data):
 
 # Función para intercalar la generación de eventos y enviar a diferentes topics
 def send_interleaved_events():
-    data = load_json_data('data.json')  # Cargar el archivo unificado
+    data = load_json_data('/etc/synthetic-producer/python/vault.json')  # Cargar el archivo unificado
     event_generators = [
         (generate_vault, 'rb_vault')
     ]
