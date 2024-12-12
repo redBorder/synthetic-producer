@@ -30,6 +30,7 @@ install -D -m 644 yamls/*.yml %{buildroot}/etc/%{name}/config
 
 mkdir -p %{buildroot}/etc/%{name}/python
 install -D -m 644 src/main/python/requirements.txt %{buildroot}/etc/%{name}/python/requirements.txt
+install -D -m 644 yamls/vault.json %{buildroot}/etc/%{name}/python/vault.json
 install -D -m 755 src/main/python/vault_scan.py %{buildroot}/etc/%{name}/python/vault_scan.py
 
 %clean
@@ -56,8 +57,11 @@ exit 0
 /etc/%{name}/config/rb_state.yml
 /etc/%{name}/config/rb_event.yml
 /etc/%{name}/python/requirements.txt
+/etc/%{name}/python/vault.json
 
 %changelog
+* Thu Dec 12 2024 Luis Blanco <ljblanco@redborder.com> 
+- add rb_vault_scan.py and json file
 * Mon Jul 15 2024 Luis Blanco <ljblanco@redborder.com> - 1.5.0-1
 - add all yamls in directory to include rb_event 
 * Wed Oct 4 2023 David Vanhoucke <dvanhoucke@redborder.com> - 1.5.0-1

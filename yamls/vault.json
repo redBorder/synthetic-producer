@@ -1,0 +1,32 @@
+{
+  "vaults": [
+      {
+        "pri": "14",
+        "pri_text": "user.info",
+        "syslogfacility": "1",
+        "syslogfacility_text": "user",
+        "syslogseverity": "6",
+        "syslogseverity_text": "info",
+        "protocol_version": "0",
+        "procid": "4087",
+        "msgid": "-",
+        "structured_data": "-",
+        "tag": "",
+        "hash": "",
+        "inputname": "imtcp",
+        "sensor_ip": "10.1.32.5",
+        "sensor_name": "Jsoto",
+        "sensor_uuid": "dc475cfd-29a6-4eef-b1e0-f62dcc4b5513",
+        "namespace": "Namespace Level Alfa",
+        "namespace_uuid": "352369f8-60fb-4b72-a603-d1d8393cca0a",
+        "organization": "TechSecure",
+        "organization_uuid": "4b839195-3d3a-4983-abc0-9731ea731cab",
+        "service_provider": "TechSecure Corp",
+        "service_provider_uuid": "c2238202-ce42-4235-814f-91d2e6e0122a",
+        "campus": "N/A",
+        "campus_uuid": "N/A",
+        "building": "Main building",
+        "building_uuid": "8e004910-c5e7-4ca0-b9df-156b1f6ad0a6"
+      }
+  ]
+}
