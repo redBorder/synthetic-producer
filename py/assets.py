@@ -42,10 +42,9 @@ user_devices_2 = [
 
 mirror_devices = [
 #    Device(ip="192.168.0.1", mac="00:1a:2b:3c:4d:5e", vendor="Cisco Systems, Inc", name="Main Router"),
-   Device(ip="192.168.0.10", mac="00:2b:3c:4d:5e:6f", vendor="Cisco Systems, Inc", name="Base Router", uuid='08eac42f-bf2d-4996-865f-9f6a4f493f71'),
-   Device(ip="192.168.0.20", mac="00:3c:4d:5e:6f:7a", vendor="Cisco Systems, Inc", name="Labs Router", uuid='0366221c-ecf6-48d2-a5a2-8529346eab54'),
-   Device(ip="192.168.0.30", mac="00:4d:5e:6f:7a:8b", vendor="TP-Link Corp.", name="Recreational Router", uuid='3e14fd96-1086-4b0a-b3ce-87b0c6863c50')
-]
+   Device(ip="192.168.0.10", mac="00:2b:3c:4d:5e:6f", vendor="Cisco Systems, Inc", name="Base Router", uuid='08eac42f-bf2d-4996-865f-9f6a4f493f71', os="Cisco Unified Communications Manager VoIP adapter"),
+   Device(ip="192.168.0.20", mac="00:3c:4d:5e:6f:7a", vendor="Cisco Systems, Inc", name="Labs Router", uuid='0366221c-ecf6-48d2-a5a2-8529346eab54', os="Cisco Unified Communications Manager VoIP adapter"),
+   Device(ip="192.168.0.30", mac="00:4d:5e:6f:7a:8b", vendor="TP-Link Corp.", name="Recreational Router", uuid='3e14fd96-1086-4b0a-b3ce-87b0c6863c50', os="TP-Link Router Firmware")]
 
 web_devices = [
   Device(ip="192.168.0.100", mac="00:5e:6f:7a:8b:9c", vendor="ASUSTek COMPUTER INC.", name="Web Server"),
