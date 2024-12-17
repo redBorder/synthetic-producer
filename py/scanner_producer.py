@@ -46,16 +46,13 @@ message_count = 0
 def run_producer(duration):
   start_time = time.time()
   vulnerabilities = Vulnerability.make_vulnerabilities()
-  try:
-    while duration < 0 or time.time() - start_time < duration:
-      for v in vulnerabilities:
-        data = generate_event(v)
-        producer.send('rb_scanner', value=data)  # Envía los eventos al topic de Kafka
-        print(f'Data sent: {data}')
-        time.sleep(random.choice(10, 20, 30, 40, 50, 60, 70, 80, 90, 100))
-    pass
-  finally:
-    producer.close()
+  while duration < 0 or time.time() - start_time < duration:
+    for v in vulnerabilities:
+      data = generate_event(v)
+      producer.send('rb_scanner', value=data)  # Envía los eventos al topic de Kafka
+      print(f'Data sent: {data}')
+      time.sleep(random.choice([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]))
+  producer.close()
 
 if __name__ == "__main__":
   import argparse
